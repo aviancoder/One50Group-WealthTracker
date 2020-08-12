@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WealthTracker", "WealthTracker\", "{AD17501B-76D0-4EA6-B535-33571FEF3464}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50038"
+		Debug.AspNetCompiler.PhysicalPath = "WealthTracker\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50038\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50038"
+		Release.AspNetCompiler.PhysicalPath = "WealthTracker\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50038\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50038"
+		SlnRelativePath = "WealthTracker\"
+		DefaultWebSiteLanguage = "Visual Basic"
+		StartServerOnDebug = "true"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD17501B-76D0-4EA6-B535-33571FEF3464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD17501B-76D0-4EA6-B535-33571FEF3464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C09157A3-8D96-4C05-9E76-35EADAD2C95C}
+	EndGlobalSection
+EndGlobal
