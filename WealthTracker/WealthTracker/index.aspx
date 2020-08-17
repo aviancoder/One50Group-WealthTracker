@@ -77,41 +77,41 @@
                     <tr>
                         <td><span>Gross Income</span></td>
                         <td>
-                            <asp:TextBox ID="ClientGrossIncome" runat="server" Text="80000.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientGrossIncome" runat="server" Text="80,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseGrossIncome" runat="server" Text="50000.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseGrossIncome" runat="server" Text="50,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td><span>Cash Savings</span></td>
                         <td>
-                            <asp:TextBox ID="ClientCashSavings" runat="server" Text="200000.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientCashSavings" runat="server" Text="200,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseCashSavings" runat="server" Text="300000.00" class="form-control  text-right"  step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseCashSavings" runat="server" Text="30,0000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td><span>Kiwi Saver</span></td>
                         <td>
-                            <asp:TextBox ID="ClientKiwiSaver" runat="server" Text="20000.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientKiwiSaver" runat="server" Text="20,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseKiwiSaver" runat="server" Text="20000.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseKiwiSaver" runat="server" Text="20,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td><span>Share / Investments</span></td>
                         <td>
-                            <asp:TextBox ID="ClientShareInvestments" runat="server" Text="25000.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientShareInvestments" runat="server" Text="25,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseShareInvestments" runat="server" Text="25000.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseShareInvestments" runat="server" Text="25,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td><span>Property Value</span></td>
                         <td>
-                            <asp:TextBox ID="ClientPropertyValue" runat="server" Text="1000000.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientPropertyValue" runat="server" Text="1,000,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td><span>Mortgage</span></td>
                         <td>
-                            <asp:TextBox ID="ClientMortgage" runat="server" Text="600000.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientMortgage" runat="server" Text="600,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td></td>
                     </tr>
                     <thead class="thead-light">
@@ -127,47 +127,47 @@
                     <tr>
                         <td><span>Credit Cards</span></td>
                         <td>
-                            <asp:TextBox ID="ClientDebtCreditCard" runat="server" Text="80000.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientDebtCreditCard" runat="server" Text="80000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseDebtCreditCard" runat="server" Text="50000.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseDebtCreditCard" runat="server" Text="50000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="DebtCreditCardRate" runat="server" Text="4.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="DebtCreditCardRate" runat="server" Text="4" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                     </tr>
                      <tr>
                         <td><span>Hire Purchase</span></td>
                         <td>
-                            <asp:TextBox ID="ClientDebtHire" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientDebtHire" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseDebtHire" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseDebtHire" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="DebtHireRate" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="DebtHireRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td><span>Personal Loans</span></td>
                         <td>
-                            <asp:TextBox ID="ClientDebtPersonal" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientDebtPersonal" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseDebtPersonal" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseDebtPersonal" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="DebtPersonalRate" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="DebtPersonalRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td><span>Vehicle Finance</span></td>
                         <td>
-                            <asp:TextBox ID="ClientDebtVehicle" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientDebtVehicle" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseDebtVehicle" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseDebtVehicle" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="DebtVehicleRate" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="DebtVehicleRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td><span>Other</span></td>
                         <td>
-                            <asp:TextBox ID="ClientDebtOther" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientDebtOther" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseDebtOther" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseDebtOther" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="DebtHOtherRate" runat="server" Text="0.00" class="form-control  text-right" step=".01"  type="number"></asp:TextBox></td>
+                            <asp:TextBox ID="DebtHOtherRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                     </tr>
                     <thead class="thead-light">
                         <tr>
@@ -190,9 +190,10 @@
             &copy; 2020 - One50Group Wealth Tracker - <a href="privacry.aspx">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
-    <script src="~/js/json2.js"></script>
+    <script src="/js/json2.js"></script>
+    <script src="/js/utilities.js"></script>
 </body>
 </html>

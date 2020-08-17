@@ -12,67 +12,73 @@ Partial Class _wealthtracker
             Dim basicDetails As New BasicDetails
             Dim output As New WealthTrackerOutputModel()
             'Get Basic Details from Form
-            basicDetails.ClientName = Request.Form("ClientName")
-            basicDetails.SpouseName = Request.Form("SpouseName")
-            basicDetails.ClientDateOfBirth = Request.Form("ClientDateOfBirth")
-            basicDetails.SpouseDateOfBirth = Request.Form("SpouseDateOfBirth")
-            basicDetails.ClientGrossIncome = Request.Form("ClientGrossIncome")
-            basicDetails.SpouseGrossIncome = Request.Form("SpouseGrossIncome")
-            basicDetails.ClientCashSavings = Request.Form("ClientCashSavings")
-            basicDetails.SpouseCashSavings = Request.Form("SpouseCashSavings")
-            basicDetails.ClientKiwiSaver = Request.Form("ClientKiwiSaver")
-            basicDetails.SpouseKiwiSaver = Request.Form("SpouseKiwiSaver")
-            basicDetails.ClientShareInvestments = Request.Form("ClientShareInvestments")
-            basicDetails.SpouseShareInvestments = Request.Form("SpouseShareInvestments")
-            basicDetails.ClientPropertyValue = Request.Form("ClientPropertyValue")
-            basicDetails.ClientMortgage = Request.Form("ClientMortgage")
-            basicDetails.ClientDebtCreditCard = Request.Form("ClientDebtCreditCard")
-            basicDetails.SpouseDebtCreditCard = Request.Form("SpouseDebtCreditCard")
-            basicDetails.DebtCreditCardRate = Request.Form("DebtCreditCardRate")
-            basicDetails.DebtCreditCardRate = basicDetails.DebtCreditCardRate / 100
-            basicDetails.ClientDebtHire = Request.Form("ClientDebtHire")
-            basicDetails.SpouseDebtHire = Request.Form("SpouseDebtHire")
-            basicDetails.DebtHireRate = Request.Form("DebtHireRate")
-            basicDetails.DebtHireRate = basicDetails.DebtHireRate / 100
-            basicDetails.ClientDebtPersonal = Request.Form("ClientDebtPersonal")
-            basicDetails.SpouseDebtPersonal = Request.Form("SpouseDebtPersonal")
-            basicDetails.DebtPersonalRate = Request.Form("DebtPersonalRate")
-            basicDetails.DebtPersonalRate = basicDetails.DebtPersonalRate / 100
-            basicDetails.ClientDebtVehicle = Request.Form("ClientDebtVehicle")
-            basicDetails.SpouseDebtVehicle = Request.Form("SpouseDebtVehicle")
-            basicDetails.DebtVehicleRate = Request.Form("DebtVehicleRate")
-            basicDetails.DebtVehicleRate = basicDetails.DebtVehicleRate / 100
-            basicDetails.ClientDebtOther = Request.Form("ClientDebtOther")
-            basicDetails.SpouseDebtOther = Request.Form("SpouseDebtOther")
-            basicDetails.DebtOtherRate = Request.Form("DebtOtherRate")
-            basicDetails.DebtOtherRate = basicDetails.DebtOtherRate / 100
-            output.BasicDetails = basicDetails
+            If (Not (Request.Form Is Nothing)) Then
+                If (Not (Request.Form("ClientName") Is Nothing)) Then
+                    basicDetails.ClientName = Request.Form("ClientName")
+                    basicDetails.SpouseName = Request.Form("SpouseName")
+                    basicDetails.ClientDateOfBirth = Request.Form("ClientDateOfBirth")
+                    basicDetails.SpouseDateOfBirth = Request.Form("SpouseDateOfBirth")
+                    basicDetails.ClientGrossIncome = ExtractNumericValueFromRequestForm("ClientGrossIncome")
+                    basicDetails.SpouseGrossIncome = ExtractNumericValueFromRequestForm("SpouseGrossIncome")
+                    basicDetails.ClientCashSavings = ExtractNumericValueFromRequestForm("ClientCashSavings")
+                    basicDetails.SpouseCashSavings = ExtractNumericValueFromRequestForm("SpouseCashSavings")
+                    basicDetails.ClientKiwiSaver = ExtractNumericValueFromRequestForm("ClientKiwiSaver")
+                    basicDetails.SpouseKiwiSaver = ExtractNumericValueFromRequestForm("SpouseKiwiSaver")
+                    basicDetails.ClientShareInvestments = ExtractNumericValueFromRequestForm("ClientShareInvestments")
+                    basicDetails.SpouseShareInvestments = ExtractNumericValueFromRequestForm("SpouseShareInvestments")
+                    basicDetails.ClientPropertyValue = ExtractNumericValueFromRequestForm("ClientPropertyValue")
+                    basicDetails.ClientMortgage = ExtractNumericValueFromRequestForm("ClientMortgage")
+                    basicDetails.ClientDebtCreditCard = ExtractNumericValueFromRequestForm("ClientDebtCreditCard")
+                    basicDetails.SpouseDebtCreditCard = ExtractNumericValueFromRequestForm("SpouseDebtCreditCard")
+                    basicDetails.DebtCreditCardRate = ExtractNumericValueFromRequestForm("DebtCreditCardRate")
+                    basicDetails.DebtCreditCardRate = basicDetails.DebtCreditCardRate / 100
+                    basicDetails.ClientDebtHire = ExtractNumericValueFromRequestForm("ClientDebtHire")
+                    basicDetails.SpouseDebtHire = ExtractNumericValueFromRequestForm("SpouseDebtHire")
+                    basicDetails.DebtHireRate = ExtractNumericValueFromRequestForm("DebtHireRate")
+                    basicDetails.DebtHireRate = basicDetails.DebtHireRate / 100
+                    basicDetails.ClientDebtPersonal = ExtractNumericValueFromRequestForm("ClientDebtPersonal")
+                    basicDetails.SpouseDebtPersonal = ExtractNumericValueFromRequestForm("SpouseDebtPersonal")
+                    basicDetails.DebtPersonalRate = ExtractNumericValueFromRequestForm("DebtPersonalRate")
+                    basicDetails.DebtPersonalRate = basicDetails.DebtPersonalRate / 100
+                    basicDetails.ClientDebtVehicle = ExtractNumericValueFromRequestForm("ClientDebtVehicle")
+                    basicDetails.SpouseDebtVehicle = ExtractNumericValueFromRequestForm("SpouseDebtVehicle")
+                    basicDetails.DebtVehicleRate = ExtractNumericValueFromRequestForm("DebtVehicleRate")
+                    basicDetails.DebtVehicleRate = basicDetails.DebtVehicleRate / 100
+                    basicDetails.ClientDebtOther = ExtractNumericValueFromRequestForm("ClientDebtOther")
+                    basicDetails.SpouseDebtOther = ExtractNumericValueFromRequestForm("SpouseDebtOther")
+                    basicDetails.DebtOtherRate = ExtractNumericValueFromRequestForm("DebtOtherRate")
+                    basicDetails.DebtOtherRate = basicDetails.DebtOtherRate / 100
 
-            output.InflationRate = 0.02
-            output.NetAssetsReturnOnInvestment = 0.04
-            output.AnnualCashSavingsContributions = 0
-            output.CashSavingsInterestRate = 0.015
-            output.KiwiSaverAverageInvestmentRate = 0.09
-            output.LifeExpectancyAverage = 88
-            output.KiwiSaverEmployeeContribution = 0.03
-            output.KiwiSaverEmployerContribution = 0.03
-            output.ShareBusinessGrowthRate = 0.1
-            output.HomeInterestRate = 0.04
-            output.HomeAnnualAppreciationRate = 0.06
-            output.HomeYearsToRepayMortgage = 15
-            output.ExpectedInheritance = New YearAmountData()
-            output.MaturingInvestment1 = New YearAmountData()
-            output.MaturingInvestment2 = New YearAmountData()
-            output.MaturingInvestment3 = New YearAmountData()
-            output.MaturingInvestment4 = New YearAmountData()
-            output.CurrentDebtYearsToRepay = 10
-            ' Compute
-            RecomputeModelFromFields(output)
-            ' Populate fields
-            PopulateFieldsFromModel(output)
-            'Dim jsonString = (New JavaScriptSerializer()).Serialize(output)
-            'Me.panelDebug.InnerHtml = jsonString
+                    output.BasicDetails = basicDetails
 
+                    output.InflationRate = 0.02
+                    output.NetAssetsReturnOnInvestment = 0.04
+                    output.AnnualCashSavingsContributions = 0
+                    output.CashSavingsInterestRate = 0.015
+                    output.KiwiSaverAverageInvestmentRate = 0.09
+                    output.LifeExpectancyAverage = 88
+                    output.KiwiSaverEmployeeContribution = 0.03
+                    output.KiwiSaverEmployerContribution = 0.03
+                    output.ShareBusinessGrowthRate = 0.1
+                    output.HomeInterestRate = 0.04
+                    output.HomeAnnualAppreciationRate = 0.06
+                    output.HomeYearsToRepayMortgage = 15
+                    output.ExpectedInheritance = New YearAmountData()
+                    output.MaturingInvestment1 = New YearAmountData()
+                    output.MaturingInvestment2 = New YearAmountData()
+                    output.MaturingInvestment3 = New YearAmountData()
+                    output.MaturingInvestment4 = New YearAmountData()
+                    output.CurrentDebtYearsToRepay = 10
+                    ' Compute
+                    RecomputeModelFromFields(output, True)
+                    ' Populate fields from model
+                    PopulateFieldsFromModel(output)
+                Else
+                    Response.Redirect("index.aspx")
+                End If
+            Else
+                Response.Redirect("index.aspx")
+            End If
         End If
     End Sub
 
@@ -80,77 +86,77 @@ Partial Class _wealthtracker
 
         Dim output As WealthTrackerOutputModel = _output
 
-        Me.TotalAnnualIncome.Text = output.TotalAnnualIncome.ToString("#,##0.00")
-        Me.YearsToRetirement.Text = output.YearsToRetirement.ToString("0")
-        Me.InflationRate.Text = (output.InflationRate * 100).ToString("0.00")
-        Me.AnnualIncomeForRetirement.Text = output.AnnualIncomeForRetirement.ToString("#,##0.00")
-        Me.LessPension.Text = output.LessPension.ToString("#,##0.00")
-        Me.TotalAnnualIncomeForRetirement.Text = output.TotalAnnualIncomeForRetirement.ToString("#,##0.00")
+        Me.TotalAnnualIncome.Text = output.TotalAnnualIncome.ToString("#,##0")
+        Me.YearsToRetirement.Text = output.YearsToRetirement.ToString("#,##0")
+        Me.InflationRate.Text = (output.InflationRate * 100).ToString("#,##0")
+        Me.AnnualIncomeForRetirement.Text = output.AnnualIncomeForRetirement.ToString("#,##0")
+        Me.LessPension.Text = output.LessPension.ToString("#,##0")
+        Me.TotalAnnualIncomeForRetirement.Text = output.TotalAnnualIncomeForRetirement.ToString("#,##0")
 
-        Me.CurrentCashSavings.Text = output.CurrentCashSavings.ToString("#,##0.00")
-        Me.AnnualCashSavingsContributions.Text = output.AnnualCashSavingsContributions.ToString("0.00")
-        Me.CashSavingsInterestRate.Text = (output.CashSavingsInterestRate * 100).ToString("0.00")
-        Me.TotalCashSavingsAtRetirement.Text = output.TotalCashSavingsAtRetirement.ToString("#,##0.00")
+        Me.CurrentCashSavings.Text = output.CurrentCashSavings.ToString("#,##0")
+        Me.AnnualCashSavingsContributions.Text = output.AnnualCashSavingsContributions.ToString("#,##0")
+        Me.CashSavingsInterestRate.Text = (output.CashSavingsInterestRate * 100).ToString("#,##0")
+        Me.TotalCashSavingsAtRetirement.Text = output.TotalCashSavingsAtRetirement.ToString("#,##0")
 
-        Me.KiwiSaverAmount.Text = output.KiwiSaverAmount.ToString("#,##0.00")
-        Me.KiwiSaverEmployeeContribution.Text = (output.KiwiSaverEmployeeContribution * 100).ToString("0.00")
-        Me.KiwiSaverAverageInvestmentRate.Text = (output.KiwiSaverAverageInvestmentRate * 100).ToString("0.00")
-        Me.KiwiSaverTotalAtRetirement.Text = output.KiwiSaverTotalAtRetirement.ToString("#,##0.00")
+        Me.KiwiSaverAmount.Text = output.KiwiSaverAmount.ToString("#,##0")
+        Me.KiwiSaverEmployeeContribution.Text = (output.KiwiSaverEmployeeContribution * 100).ToString("#,##0")
+        Me.KiwiSaverAverageInvestmentRate.Text = (output.KiwiSaverAverageInvestmentRate * 100).ToString("#,##0")
+        Me.KiwiSaverTotalAtRetirement.Text = output.KiwiSaverTotalAtRetirement.ToString("#,##0")
 
-        Me.CurrentShareBusiness.Text = output.CurrentShareBusiness.ToString("#,##0.00")
-        Me.ShareBusinessGrowthRate.Text = (output.ShareBusinessGrowthRate * 100).ToString("0.00")
-        Me.TotalShareBusinessAtRetirement.Text = output.TotalShareBusinessAtRetirement.ToString("#,##0.00")
+        Me.CurrentShareBusiness.Text = output.CurrentShareBusiness.ToString("#,##0")
+        Me.ShareBusinessGrowthRate.Text = (output.ShareBusinessGrowthRate * 100).ToString("#,##0")
+        Me.TotalShareBusinessAtRetirement.Text = output.TotalShareBusinessAtRetirement.ToString("#,##0")
 
-        Me.HomeProperty.Text = output.HomeProperty.ToString("#,##0.00")
-        Me.HomeMortgage.Text = output.HomeMortgage.ToString("#,##0.00")
-        Me.HomeInterestRate.Text = (output.HomeInterestRate * 100).ToString("0.00")
-        Me.HomeAnnualAppreciationRate.Text = (output.HomeAnnualAppreciationRate * 100).ToString("0")
-        Me.HomeYearsToRepayMortgage.Text = output.HomeYearsToRepayMortgage.ToString("0")
-        Me.NetHomeValueAtRetirement.Text = output.NetHomeValueAtRetirement.ToString("#,##0.00")
+        Me.HomeProperty.Text = output.HomeProperty.ToString("#,##0")
+        Me.HomeMortgage.Text = output.HomeMortgage.ToString("#,##0")
+        Me.HomeInterestRate.Text = (output.HomeInterestRate * 100).ToString("#,##0")
+        Me.HomeAnnualAppreciationRate.Text = (output.HomeAnnualAppreciationRate * 100).ToString("#,##0")
+        Me.HomeYearsToRepayMortgage.Text = output.HomeYearsToRepayMortgage.ToString("#,##0")
+        Me.NetHomeValueAtRetirement.Text = output.NetHomeValueAtRetirement.ToString("#,##0")
 
-        Me.NetAssetsRequired.Text = output.NetAssetsRequired.ToString("#,##0.00")
-        Me.NetAssetsReturnOnInvestment.Text = (output.NetAssetsReturnOnInvestment * 100).ToString("0")
-        Me.TotalNetAssetsRequired.Text = output.TotalNetAssetsRequired.ToString("#,##0.00")
+        Me.NetAssetsRequired.Text = output.NetAssetsRequired.ToString("#,##0")
+        Me.NetAssetsReturnOnInvestment.Text = (output.NetAssetsReturnOnInvestment * 100).ToString("#,##0")
+        Me.TotalNetAssetsRequired.Text = output.TotalNetAssetsRequired.ToString("#,##0")
 
-        Me.ExpectedInheritanceYear.Text = output.ExpectedInheritance.TargetYear.ToString("0")
-        Me.ExpectedInheritanceAmount.Text = output.ExpectedInheritance.Amount.ToString("0.00")
-        Me.MaturingInvestment1Year.Text = output.MaturingInvestment1.TargetYear.ToString("0")
-        Me.MaturingInvestment1Amount.Text = output.MaturingInvestment1.Amount.ToString("0.00")
-        Me.MaturingInvestment2Year.Text = output.MaturingInvestment2.TargetYear.ToString("0")
-        Me.MaturingInvestment2Amount.Text = output.MaturingInvestment2.Amount.ToString("0.00")
-        Me.MaturingInvestment3Year.Text = output.MaturingInvestment3.TargetYear.ToString("0")
-        Me.MaturingInvestment3Amount.Text = output.MaturingInvestment3.Amount.ToString("0.00")
-        Me.MaturingInvestment4Year.Text = output.MaturingInvestment4.TargetYear.ToString("0")
-        Me.MaturingInvestment4Amount.Text = output.MaturingInvestment4.Amount.ToString("0.00")
+        Me.ExpectedInheritanceYear.Text = output.ExpectedInheritance.TargetYear.ToString("#,##0")
+        Me.ExpectedInheritanceAmount.Text = output.ExpectedInheritance.Amount.ToString("#,##0")
+        Me.MaturingInvestment1Year.Text = output.MaturingInvestment1.TargetYear.ToString("#,##0")
+        Me.MaturingInvestment1Amount.Text = output.MaturingInvestment1.Amount.ToString("#,##0")
+        Me.MaturingInvestment2Year.Text = output.MaturingInvestment2.TargetYear.ToString("#,##0")
+        Me.MaturingInvestment2Amount.Text = output.MaturingInvestment2.Amount.ToString("#,##0")
+        Me.MaturingInvestment3Year.Text = output.MaturingInvestment3.TargetYear.ToString("#,##0")
+        Me.MaturingInvestment3Amount.Text = output.MaturingInvestment3.Amount.ToString("#,##0")
+        Me.MaturingInvestment4Year.Text = output.MaturingInvestment4.TargetYear.ToString("#,##0")
+        Me.MaturingInvestment4Amount.Text = output.MaturingInvestment4.Amount.ToString("#,##0")
 
-        Me.CurrentDebt.Text = output.CurrentDebt.ToString("#,##0.00")
-        Me.CurrentDebtMaxInterestRate.Text = (output.CurrentDebtMaxInterestRate * 100).ToString("0")
-        Me.CurrentDebtYearsToRepay.Text = output.CurrentDebtYearsToRepay.ToString("0")
-        Me.CurrentDebtMothlyRepayment.Text = output.CurrentDebtMothlyRepayment.ToString("#,##0.00")
+        Me.CurrentDebt.Text = output.CurrentDebt.ToString("#,##0")
+        Me.CurrentDebtMaxInterestRate.Text = (output.CurrentDebtMaxInterestRate * 100).ToString("#,##0")
+        Me.CurrentDebtYearsToRepay.Text = output.CurrentDebtYearsToRepay.ToString("#,##0")
+        Me.CurrentDebtMothlyRepayment.Text = output.CurrentDebtMothlyRepayment.ToString("#,##0")
 
-        Me.InvestmentProperty1PurchaseYear.Text = output.InvestmentProperty1PurchaseYear.ToString("0")
-        Me.InvestmentProperty1Value.Text = output.InvestmentProperty1Value.ToString("0.00")
-        Me.InvestmentProperty1Debt.Text = output.InvestmentProperty1Debt.ToString("0.00")
-        Me.InvestmentProperty1RepaymentsBeginYear.Text = output.InvestmentProperty1RepaymentsBeginYear.ToString("0")
-        Me.InvestmentProperty1YearsToRepayDebt.Text = output.InvestmentProperty1YearsToRepayDebt.ToString("0")
-        Me.InvestmentProperty1MonthlyRepayments.Text = output.InvestmentProperty1MonthlyRepayments.ToString("#,##0.00")
-        Me.InvestmentProperty1NetHomeValueAtRetirement.Text = output.InvestmentProperty1NetHomeValueAtRetirement.ToString("#,##0.00")
+        Me.InvestmentProperty1PurchaseYear.Text = output.InvestmentProperty1PurchaseYear.ToString("#,##0")
+        Me.InvestmentProperty1Value.Text = output.InvestmentProperty1Value.ToString("#,##0")
+        Me.InvestmentProperty1Debt.Text = output.InvestmentProperty1Debt.ToString("#,##0")
+        Me.InvestmentProperty1RepaymentsBeginYear.Text = output.InvestmentProperty1RepaymentsBeginYear.ToString("#,##0")
+        Me.InvestmentProperty1YearsToRepayDebt.Text = output.InvestmentProperty1YearsToRepayDebt.ToString("#,##0")
+        Me.InvestmentProperty1MonthlyRepayments.Text = output.InvestmentProperty1MonthlyRepayments.ToString("#,##0")
+        Me.InvestmentProperty1NetHomeValueAtRetirement.Text = output.InvestmentProperty1NetHomeValueAtRetirement.ToString("#,##0")
 
-        Me.InvestmentProperty2PurchaseYear.Text = output.InvestmentProperty2PurchaseYear.ToString("0")
-        Me.InvestmentProperty2Value.Text = output.InvestmentProperty2Value.ToString("0.00")
-        Me.InvestmentProperty2Debt.Text = output.InvestmentProperty2Debt.ToString("0.00")
-        Me.InvestmentProperty2RepaymentsBeginYear.Text = output.InvestmentProperty2RepaymentsBeginYear.ToString("0")
-        Me.InvestmentProperty2YearsToRepayDebt.Text = output.InvestmentProperty2YearsToRepayDebt.ToString("0")
-        Me.InvestmentProperty2MonthlyRepayments.Text = output.InvestmentProperty2MonthlyRepayments.ToString("#,##0.00")
-        Me.InvestmentProperty2NetHomeValueAtRetirement.Text = output.InvestmentProperty2NetHomeValueAtRetirement.ToString("#,##0.00")
+        Me.InvestmentProperty2PurchaseYear.Text = output.InvestmentProperty2PurchaseYear.ToString("#,##0")
+        Me.InvestmentProperty2Value.Text = output.InvestmentProperty2Value.ToString("#,##0")
+        Me.InvestmentProperty2Debt.Text = output.InvestmentProperty2Debt.ToString("#,##0")
+        Me.InvestmentProperty2RepaymentsBeginYear.Text = output.InvestmentProperty2RepaymentsBeginYear.ToString("#,##0")
+        Me.InvestmentProperty2YearsToRepayDebt.Text = output.InvestmentProperty2YearsToRepayDebt.ToString("#,##0")
+        Me.InvestmentProperty2MonthlyRepayments.Text = output.InvestmentProperty2MonthlyRepayments.ToString("#,##0")
+        Me.InvestmentProperty2NetHomeValueAtRetirement.Text = output.InvestmentProperty2NetHomeValueAtRetirement.ToString("#,##0")
 
-        Me.InvestmentProperty3PurchaseYear.Text = output.InvestmentProperty3PurchaseYear.ToString("0")
-        Me.InvestmentProperty3Value.Text = output.InvestmentProperty3Value.ToString("0.00")
-        Me.InvestmentProperty3Debt.Text = output.InvestmentProperty3Debt.ToString("0.00")
-        Me.InvestmentProperty3RepaymentsBeginYear.Text = output.InvestmentProperty3RepaymentsBeginYear.ToString("0")
-        Me.InvestmentProperty3YearsToRepayDebt.Text = output.InvestmentProperty3YearsToRepayDebt.ToString("0")
-        Me.InvestmentProperty3MonthlyRepayments.Text = output.InvestmentProperty3MonthlyRepayments.ToString("#,##0.00")
-        Me.InvestmentProperty3NetHomeValueAtRetirement.Text = output.InvestmentProperty3NetHomeValueAtRetirement.ToString("#,##0.00")
+        Me.InvestmentProperty3PurchaseYear.Text = output.InvestmentProperty3PurchaseYear.ToString("#,##0")
+        Me.InvestmentProperty3Value.Text = output.InvestmentProperty3Value.ToString("#,##0")
+        Me.InvestmentProperty3Debt.Text = output.InvestmentProperty3Debt.ToString("#,##0")
+        Me.InvestmentProperty3RepaymentsBeginYear.Text = output.InvestmentProperty3RepaymentsBeginYear.ToString("#,##0")
+        Me.InvestmentProperty3YearsToRepayDebt.Text = output.InvestmentProperty3YearsToRepayDebt.ToString("#,##0")
+        Me.InvestmentProperty3MonthlyRepayments.Text = output.InvestmentProperty3MonthlyRepayments.ToString("#,##0")
+        Me.InvestmentProperty3NetHomeValueAtRetirement.Text = output.InvestmentProperty3NetHomeValueAtRetirement.ToString("#,##0")
 
     End Sub
 
@@ -165,7 +171,7 @@ Partial Class _wealthtracker
         UpdateModelFromUpdatableFields(output)
 
         ' recompute values
-        RecomputeModelFromFields(output)
+        RecomputeModelFromFields(output, False)
 
         ' populate Fields
         PopulateFieldsFromModel(output)
@@ -240,11 +246,11 @@ Partial Class _wealthtracker
 
     End Sub
 
-    Private Sub RecomputeModelFromFields(ByRef _output As WealthTrackerOutputModel)
+    Private Sub RecomputeModelFromFields(ByRef _output As WealthTrackerOutputModel, ByVal _isFromBasicDetails As Boolean)
         Dim retirementAge As Integer = 65
 
         Dim wtCustomLogic As New WealthTracker.CustomLogic.WealthTrackerCustomLogic()
-        wtCustomLogic.FillGeneralData(retirementAge, _output)
+        If (_isFromBasicDetails = True) Then wtCustomLogic.FillGeneralData(retirementAge, _output)
         wtCustomLogic.FillIncomeData(_output)
         wtCustomLogic.FillCashSavings(_output)
         wtCustomLogic.FillKiwiData(_output, retirementAge)
@@ -262,4 +268,18 @@ Partial Class _wealthtracker
         Session.Add("WEALTHTRACKER_CURRENTOBJECT", _output)
 
     End Sub
+
+    Private Function ExtractNumericValueFromRequestForm(ByVal _key As String) As Double
+        Dim retval As Double = 0
+        If (Not (Request.Form Is Nothing)) Then
+            If (Not (Request.Form(_key) Is Nothing)) Then
+                If (String.IsNullOrEmpty(Request.Form(_key)) = False) Then
+                    Dim formValue As String = Request.Form(_key)
+                    formValue = formValue.Replace(",", "")
+                    retval = Double.Parse(formValue)
+                End If
+            End If
+        End If
+        Return retval
+    End Function
 End Class

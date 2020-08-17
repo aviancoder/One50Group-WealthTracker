@@ -23,8 +23,11 @@ $(document).ready(function () {
             }
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.y:,.2f}</b><br/>'
+            formatter: function () {
+                return '<b>' + this.series.name + ' $' + Highcharts.numberFormat(this.y, 0, '.', ',') + '</b>';
+            }
         },
+        
         xAxis: {
             title: {
                 text: 'Years to Retirement'
@@ -59,8 +62,22 @@ $(document).ready(function () {
             { stack: 1, type: 'area', name: 'Home', data: [], lineWidth: 0 },
             { stack: 1, type: 'area', name: 'Investment / Inheritance', data: [], lineWidth: 0 },
             { stack: 2, type: 'spline', name: 'Debt', data: [], lineWidth: 4 },
-            { stack: 3, type: 'spline', name: 'Current Assets', data: [], lineWidth: 4 },
-            { stack: 4, type: 'spline', name: 'Financial Goal', data: [], lineWidth: 4 }
+            {
+                stack: 3, type: 'spline', name: 'Current Assets', data: [], lineWidth: 4
+                , dataLabels: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + ' $' + Highcharts.numberFormat(this.y, 0, '.', ',') + '</b>';    
+                    }
+                }
+            },   
+            {
+                stack: 4, type: 'spline', name: 'Financial Goal', data: [], lineWidth: 4
+                , dataLabels: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + ' $' + Highcharts.numberFormat(this.y, 0, '.', ',') + '</b>';
+                    }
+                }
+            }
         ]
     };
     chart = Highcharts.chart('ChartContainer', options);
@@ -298,9 +315,7 @@ function getCurrentAssets() {
             chart.series[9].setData(dataItems, false);
             chart.redraw();
             chart.series[9].points[chart.series[9].points.length - 1].update({
-                dataLabels: {
-                    enabled: true, format: '$ {point.y:,.2f}', color: '#000000'
-                }
+                dataLabels: { enabled: true }
             });
         },
         cache: false
@@ -323,9 +338,7 @@ function getFinancialGoal() {
             chart.series[10].setData(dataItems, false);
             chart.redraw();
             chart.series[10].points[chart.series[10].points.length - 1].update({
-                dataLabels: {
-                    enabled: true, format: '$ {point.y:,.2f}', color: '#000000'
-                }
+                dataLabels: {enabled: true}
             });
         },
         cache: false

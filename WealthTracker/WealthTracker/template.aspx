@@ -40,6 +40,7 @@
         <main role="main" class="pb-3">
             <form id="formMain" runat="server">
                 <div>
+                    <asp:TextBox ID="test" runat="server" Text="" class="form-control  text-right one50group-formattednumber" type="text"></asp:TextBox>
                 </div>
             </form>
         </main>
@@ -50,10 +51,13 @@
             &copy; 2020 - One50Group Wealth Tracker - <a href="privacry.aspx">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
-    <script src="~/js/json2.js"></script>
-    <script src="~/js/site.js"></script>
+    <script src="/js/json2.js"></script>
+    <script src="/js/utilities.js"></script>
+    <script type="text/javascript">
+
+    </script>
 </body>
 </html>
