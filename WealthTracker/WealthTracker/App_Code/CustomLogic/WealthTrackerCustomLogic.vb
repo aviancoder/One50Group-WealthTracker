@@ -96,6 +96,13 @@ Namespace WealthTracker.CustomLogic
             End If
             ' build the list
             Dim cdList As New List(Of CurrentDebtData)
+
+            ' Add Year 0 with initial values
+            Dim initialData As New CurrentDebtData
+            initialData.YearsToRetire = 0
+            initialData.CumulativeCurrentDebt = _output.CurrentDebt
+            cdList.Add(initialData)
+
             For i As Integer = 1 To _output.YearsToRetirement
                 Dim mdata As New CurrentDebtData
                 mdata.YearsToRetire = i
@@ -156,7 +163,8 @@ Namespace WealthTracker.CustomLogic
             Dim iiList As List(Of InheritanceInvestmentData) = _output.InheritanceInvestmentList
             Dim dList As List(Of CurrentDebtData) = _output.CurrentDebtList
 
-            For i As Integer = 1 To _output.YearsToRetirement
+
+            For i As Integer = 0 To _output.YearsToRetirement
                 Dim idx As Integer = i
                 Dim csData = csList.Where(Function(x) x.YearsToRetire = idx).FirstOrDefault()
                 Dim sbData = sbList.Where(Function(x) x.YearsToRetire = idx).FirstOrDefault()
@@ -191,6 +199,12 @@ Namespace WealthTracker.CustomLogic
             Dim dataList As New List(Of FinancialGoalData)()
             Dim cumulativeFinancialGoal As Double = initialFinancialGoal + yearlyGoalAmount
 
+            ' Add Year 0 with initial values
+            Dim initialData As New FinancialGoalData
+            initialData.YearsToRetire = 0
+            initialData.CumulativeFinancialGoal = initialFinancialGoal
+            dataList.Add(initialData)
+
             For i As Integer = 1 To _output.YearsToRetirement
                 Dim financialGoal As Double = cumulativeFinancialGoal
                 Dim data As New FinancialGoalData()
@@ -214,6 +228,12 @@ Namespace WealthTracker.CustomLogic
             Dim employerContribution As Double = (cumulativeCombinedSalary * _output.KiwiSaverEmployerContribution) - ((cumulativeCombinedSalary * _output.KiwiSaverEmployerContribution) * GetESCT(cumulativeCombinedSalary))
             Dim cumulativeKiwiSaver As Double = (_output.KiwiSaverAmount + clientContribution + employerContribution) + ((_output.KiwiSaverAmount + clientContribution + employerContribution) * _output.KiwiSaverAverageInvestmentRate)
 
+            ' Add Year 0 with initial values
+            Dim initialData As New KiwiSaverData
+            initialData.YearsToRetire = 0
+            initialData.CumulativeKiwiSaver = _output.KiwiSaverAmount
+            retval.Add(initialData)
+
             For i As Integer = 1 To _output.YearsToRetirement
                 Dim data As KiwiSaverData = New KiwiSaverData()
                 data.YearsToRetire = i
@@ -234,6 +254,12 @@ Namespace WealthTracker.CustomLogic
             Dim retval As New List(Of CashSavingsData)()
             Dim cumulativeCashSavings As Double = (_output.CurrentCashSavings + _output.AnnualCashSavingsContributions) + ((_output.CurrentCashSavings + _output.AnnualCashSavingsContributions) * _output.CashSavingsInterestRate)
 
+            ' Add Year 0 with initial values
+            Dim initialData As New CashSavingsData
+            initialData.YearsToRetire = 0
+            initialData.CumulativeCashSavings = _output.CurrentCashSavings
+            retval.Add(initialData)
+
             For i As Integer = 1 To _output.YearsToRetirement
                 Dim data As New CashSavingsData()
                 data.YearsToRetire = i
@@ -248,6 +274,12 @@ Namespace WealthTracker.CustomLogic
         Public Function GetShareBusinessTable(ByRef _output As WealthTrackerOutputModel) As List(Of ShareBusinessData)
             Dim retval As New List(Of ShareBusinessData)()
             Dim cumulativeShareBusiness As Double = (_output.CurrentShareBusiness)
+
+            ' Add Year 0 with initial values
+            Dim initialData As New ShareBusinessData
+            initialData.YearsToRetire = 0
+            initialData.CumulativeShareBusiness = cumulativeShareBusiness
+            retval.Add(initialData)
 
             For i As Integer = 1 To _output.YearsToRetirement
                 Dim data As New ShareBusinessData()
@@ -271,6 +303,13 @@ Namespace WealthTracker.CustomLogic
             If (dlist.Count() > 0) Then
                 yearlyPayment = dlist.Item(0).Payment
             End If
+
+            ' Add Year 0 with initial values
+            Dim initialData As New PropertyData
+            initialData.YearsToRetire = 0
+            initialData.NetPropertyWealth = _presentValue - _debtAmount
+            initialData.YearlyPayment = yearlyPayment
+            retval.Add(initialData)
 
             For i As Integer = 1 To _numberOfYears
 
@@ -312,6 +351,13 @@ Namespace WealthTracker.CustomLogic
             Dim yearlyMortgage As Double = GetYearlyPayment(_presentValue, _interestRate, _numberOfYears)
             Dim startingBalance As Double = _presentValue
 
+            ' Add Year 0 with initial values
+            Dim initialData As New MortgageData
+            initialData.RepaymentsYear = 0
+            initialData.StartingBalance = _presentValue
+            initialData.EndingBalance = _presentValue
+            retval.Add(initialData)
+
             For i As Integer = 1 To _numberOfYears
                 Dim mdata As New MortgageData
                 mdata.RepaymentsYear = i
@@ -336,6 +382,12 @@ Namespace WealthTracker.CustomLogic
         Public Function GetInheritanceHomeTable(ByRef _output As WealthTrackerOutputModel) As List(Of InheritanceInvestmentData)
             Dim retval As New List(Of InheritanceInvestmentData)()
             Dim cumulativeInheritanceInvestment As Double = 0
+
+            ' Add Year 0 with initial values
+            Dim initialData As New InheritanceInvestmentData
+            initialData.YearsToRetire = 0
+            initialData.CumulativeInheritanceInvestment = cumulativeInheritanceInvestment
+            retval.Add(initialData)
 
             For i As Integer = 1 To _output.YearsToRetirement
                 Dim data As New InheritanceInvestmentData()
