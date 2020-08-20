@@ -54,7 +54,7 @@ Partial Class _wealthtracker
                     output.InflationRate = 0.02
                     output.NetAssetsReturnOnInvestment = 0.04
                     output.AnnualCashSavingsContributions = 0
-                    output.CashSavingsInterestRate = 0.015
+                    output.CashSavingsInterestRate = 0.02
                     output.KiwiSaverAverageInvestmentRate = 0.09
                     output.LifeExpectancyAverage = 88
                     output.KiwiSaverEmployeeContribution = 0.03
@@ -69,6 +69,10 @@ Partial Class _wealthtracker
                     output.MaturingInvestment3 = New YearAmountData()
                     output.MaturingInvestment4 = New YearAmountData()
                     output.CurrentDebtYearsToRepay = 10
+
+                    ' Get property values
+                    ExtractInvestmentPropertiesValuesFromFields(output)
+
                     ' Compute
                     RecomputeModelFromFields(output, True)
                     ' Populate fields from model
@@ -134,30 +138,6 @@ Partial Class _wealthtracker
         Me.CurrentDebtYearsToRepay.Text = output.CurrentDebtYearsToRepay.ToString("#,##0")
         Me.CurrentDebtMothlyRepayment.Text = output.CurrentDebtMothlyRepayment.ToString("#,##0")
 
-        Me.InvestmentProperty1PurchaseYear.Text = output.InvestmentProperty1PurchaseYear.ToString("#,##0")
-        Me.InvestmentProperty1Value.Text = output.InvestmentProperty1Value.ToString("#,##0")
-        Me.InvestmentProperty1Debt.Text = output.InvestmentProperty1Debt.ToString("#,##0")
-        Me.InvestmentProperty1RepaymentsBeginYear.Text = output.InvestmentProperty1RepaymentsBeginYear.ToString("#,##0")
-        Me.InvestmentProperty1YearsToRepayDebt.Text = output.InvestmentProperty1YearsToRepayDebt.ToString("#,##0")
-        Me.InvestmentProperty1MonthlyRepayments.Text = output.InvestmentProperty1MonthlyRepayments.ToString("#,##0")
-        Me.InvestmentProperty1NetHomeValueAtRetirement.Text = output.InvestmentProperty1NetHomeValueAtRetirement.ToString("#,##0")
-
-        Me.InvestmentProperty2PurchaseYear.Text = output.InvestmentProperty2PurchaseYear.ToString("#,##0")
-        Me.InvestmentProperty2Value.Text = output.InvestmentProperty2Value.ToString("#,##0")
-        Me.InvestmentProperty2Debt.Text = output.InvestmentProperty2Debt.ToString("#,##0")
-        Me.InvestmentProperty2RepaymentsBeginYear.Text = output.InvestmentProperty2RepaymentsBeginYear.ToString("#,##0")
-        Me.InvestmentProperty2YearsToRepayDebt.Text = output.InvestmentProperty2YearsToRepayDebt.ToString("#,##0")
-        Me.InvestmentProperty2MonthlyRepayments.Text = output.InvestmentProperty2MonthlyRepayments.ToString("#,##0")
-        Me.InvestmentProperty2NetHomeValueAtRetirement.Text = output.InvestmentProperty2NetHomeValueAtRetirement.ToString("#,##0")
-
-        Me.InvestmentProperty3PurchaseYear.Text = output.InvestmentProperty3PurchaseYear.ToString("#,##0")
-        Me.InvestmentProperty3Value.Text = output.InvestmentProperty3Value.ToString("#,##0")
-        Me.InvestmentProperty3Debt.Text = output.InvestmentProperty3Debt.ToString("#,##0")
-        Me.InvestmentProperty3RepaymentsBeginYear.Text = output.InvestmentProperty3RepaymentsBeginYear.ToString("#,##0")
-        Me.InvestmentProperty3YearsToRepayDebt.Text = output.InvestmentProperty3YearsToRepayDebt.ToString("#,##0")
-        Me.InvestmentProperty3MonthlyRepayments.Text = output.InvestmentProperty3MonthlyRepayments.ToString("#,##0")
-        Me.InvestmentProperty3NetHomeValueAtRetirement.Text = output.InvestmentProperty3NetHomeValueAtRetirement.ToString("#,##0")
-
     End Sub
 
     Protected Sub btnUpdateChart_Click(sender As Object, e As EventArgs) Handles btnUpdateChart.Click
@@ -170,11 +150,16 @@ Partial Class _wealthtracker
         ' update model based from form data
         UpdateModelFromUpdatableFields(output)
 
+        ' Get property values
+        ExtractInvestmentPropertiesValuesFromFields(output)
+
         ' recompute values
         RecomputeModelFromFields(output, False)
 
         ' populate Fields
         PopulateFieldsFromModel(output)
+        PopulateInvestmentPropertiesFieldsFromModel(output)
+
     End Sub
 
     Private Sub UpdateModelFromUpdatableFields(ByRef _output As WealthTrackerOutputModel)
@@ -182,9 +167,11 @@ Partial Class _wealthtracker
         _output.YearsToRetirement = Me.YearsToRetirement.Text
         _output.InflationRate = Me.InflationRate.Text
         _output.InflationRate = _output.InflationRate / 100
+        _output.LessPension = Me.LessPension.Text
         _output.AnnualCashSavingsContributions = Me.AnnualCashSavingsContributions.Text
         _output.CashSavingsInterestRate = Me.CashSavingsInterestRate.Text
         _output.CashSavingsInterestRate = _output.CashSavingsInterestRate / 100
+        _output.KiwiSaverAmount = Me.KiwiSaverAmount.Text
         _output.KiwiSaverEmployeeContribution = Me.KiwiSaverEmployeeContribution.Text
         _output.KiwiSaverEmployeeContribution = _output.KiwiSaverEmployeeContribution / 100
         _output.KiwiSaverAverageInvestmentRate = Me.KiwiSaverAverageInvestmentRate.Text
@@ -226,24 +213,6 @@ Partial Class _wealthtracker
 
         _output.CurrentDebtYearsToRepay = Me.CurrentDebtYearsToRepay.Text
 
-        _output.InvestmentProperty1PurchaseYear = Me.InvestmentProperty1PurchaseYear.Text
-        _output.InvestmentProperty1Value = Me.InvestmentProperty1Value.Text
-        _output.InvestmentProperty1Debt = Me.InvestmentProperty1Debt.Text
-        _output.InvestmentProperty1RepaymentsBeginYear = Me.InvestmentProperty1RepaymentsBeginYear.Text
-        _output.InvestmentProperty1YearsToRepayDebt = Me.InvestmentProperty1YearsToRepayDebt.Text
-
-        _output.InvestmentProperty2PurchaseYear = Me.InvestmentProperty2PurchaseYear.Text
-        _output.InvestmentProperty2Value = Me.InvestmentProperty2Value.Text
-        _output.InvestmentProperty2Debt = Me.InvestmentProperty2Debt.Text
-        _output.InvestmentProperty2RepaymentsBeginYear = Me.InvestmentProperty2RepaymentsBeginYear.Text
-        _output.InvestmentProperty2YearsToRepayDebt = Me.InvestmentProperty2YearsToRepayDebt.Text
-
-        _output.InvestmentProperty3PurchaseYear = Me.InvestmentProperty3PurchaseYear.Text
-        _output.InvestmentProperty3Value = Me.InvestmentProperty3Value.Text
-        _output.InvestmentProperty3Debt = Me.InvestmentProperty3Debt.Text
-        _output.InvestmentProperty3RepaymentsBeginYear = Me.InvestmentProperty3RepaymentsBeginYear.Text
-        _output.InvestmentProperty3YearsToRepayDebt = Me.InvestmentProperty3YearsToRepayDebt.Text
-
     End Sub
 
     Private Sub RecomputeModelFromFields(ByRef _output As WealthTrackerOutputModel, ByVal _isFromBasicDetails As Boolean)
@@ -251,17 +220,15 @@ Partial Class _wealthtracker
 
         Dim wtCustomLogic As New WealthTracker.CustomLogic.WealthTrackerCustomLogic()
         If (_isFromBasicDetails = True) Then wtCustomLogic.FillGeneralData(retirementAge, _output)
-        wtCustomLogic.FillIncomeData(_output)
+        wtCustomLogic.FillIncomeData(_output, _isFromBasicDetails)
         wtCustomLogic.FillCashSavings(_output)
-        wtCustomLogic.FillKiwiData(_output, retirementAge)
+        wtCustomLogic.FillKiwiData(_output, retirementAge, _isFromBasicDetails)
         wtCustomLogic.FillSharesBusiness(_output)
         wtCustomLogic.FillHomeData(_output)
         wtCustomLogic.FillInheritanceInvestment(_output)
         wtCustomLogic.FillCurrentDebt(_output)
         wtCustomLogic.FillCurrentAssetsData(_output)
-        wtCustomLogic.FillInvestmentProperty1(_output)
-        wtCustomLogic.FillInvestmentProperty2(_output)
-        wtCustomLogic.FillInvestmentProperty3(_output)
+        wtCustomLogic.FillInvestmentProperty(_output)
         wtCustomLogic.FillFinancialGoalData(_output)
 
         ' Store the object in session
@@ -282,4 +249,48 @@ Partial Class _wealthtracker
         End If
         Return retval
     End Function
+
+    Private Sub ExtractInvestmentPropertiesValuesFromFields(ByRef _output As WealthTrackerOutputModel)
+
+        Dim dataList As New List(Of InvestmentPropertyData)
+
+        For i As Integer = 1 To 20
+
+            Dim propertyName As HiddenField = formMain.FindControl("InvestmentPropertyName" & i)
+            If (Not (propertyName Is Nothing)) Then
+                If (String.IsNullOrEmpty(propertyName.Value) = False) Then
+                    Dim mdata As New InvestmentPropertyData()
+                    mdata.InvestmentPropertyIndex = dataList.Count + 1
+                    mdata.InvestmentPropertyName = propertyName.Value
+                    mdata.InvestmentPropertyPurchaseYear = CType(formMain.FindControl("InvestmentPropertyPurchaseYear" & i), TextBox).Text
+                    mdata.InvestmentPropertyValue = CType(formMain.FindControl("InvestmentPropertyValue" & i), TextBox).Text
+                    mdata.InvestmentPropertyDebt = CType(formMain.FindControl("InvestmentPropertyDebt" & i), TextBox).Text
+                    mdata.InvestmentPropertyRepaymentsBeginYear = CType(formMain.FindControl("InvestmentPropertyRepaymentsBeginYear" & i), TextBox).Text
+                    mdata.InvestmentPropertyYearsToRepayDebt = CType(formMain.FindControl("InvestmentPropertyYearsToRepayDebt" & i), TextBox).Text
+                    dataList.Add(mdata)
+                End If
+            End If
+        Next
+
+        _output.InvestmentPropertyList = dataList
+    End Sub
+
+    Public Sub PopulateInvestmentPropertiesFieldsFromModel(ByRef _output As WealthTrackerOutputModel)
+
+        Dim dataList As List(Of InvestmentPropertyData) = _output.InvestmentPropertyList
+        For i As Integer = 0 To dataList.Count - 1
+
+            Dim mdata As InvestmentPropertyData = dataList.Item(i)
+            CType(formMain.FindControl("InvestmentPropertyName" & (i + 1)), HiddenField).Value = mdata.InvestmentPropertyName
+            CType(formMain.FindControl("lblInvestmentPropertyName" & (i + 1)), Label).Text = mdata.InvestmentPropertyName
+            CType(formMain.FindControl("InvestmentPropertyPurchaseYear" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyPurchaseYear.ToString("#,##0")
+            CType(formMain.FindControl("InvestmentPropertyValue" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyValue.ToString("#,##0")
+            CType(formMain.FindControl("InvestmentPropertyDebt" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyDebt.ToString("#,##0")
+            CType(formMain.FindControl("InvestmentPropertyRepaymentsBeginYear" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyRepaymentsBeginYear.ToString("#,##0")
+            CType(formMain.FindControl("InvestmentPropertyYearsToRepayDebt" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyYearsToRepayDebt.ToString("#,##0")
+            CType(formMain.FindControl("InvestmentPropertyMonthlyRepayments" & (i + 1)), Label).Text = mdata.InvestmentPropertyMonthlyRepayments.ToString("#,##0")
+            CType(formMain.FindControl("InvestmentPropertyNetHomeValueAtRetirement" & (i + 1)), Label).Text = mdata.InvestmentPropertyNetHomeValueAtRetirement.ToString("#,##0")
+        Next
+
+    End Sub
 End Class

@@ -127,9 +127,9 @@
                     <tr>
                         <td><span>Credit Cards</span></td>
                         <td>
-                            <asp:TextBox ID="ClientDebtCreditCard" runat="server" Text="80000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientDebtCreditCard" runat="server" Text="80,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseDebtCreditCard" runat="server" Text="50000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseDebtCreditCard" runat="server" Text="50,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
                             <asp:TextBox ID="DebtCreditCardRate" runat="server" Text="4" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                     </tr>

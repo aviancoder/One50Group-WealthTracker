@@ -79,6 +79,7 @@ Namespace WealthTracker.Models
         Public Property InvestmentProperty3MonthlyRepayments As Double
         Public Property InvestmentProperty3NetHomeValueAtRetirement As Double
         Public Property InvestmentProperty3List As List(Of PropertyData)
+        Public Property InvestmentPropertyList As List(Of InvestmentPropertyData)
         Public Property CurrentAssetsList As List(Of CurrentAssetsData)
         Public Property FinancialGoalList As List(Of FinancialGoalData)
     End Class
