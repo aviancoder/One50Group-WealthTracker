@@ -55,10 +55,13 @@ Partial Class _wealthtracker
                     output.NetAssetsReturnOnInvestment = 0.04
                     output.AnnualCashSavingsContributions = 0
                     output.CashSavingsInterestRate = 0.02
-                    output.KiwiSaverAverageInvestmentRate = 0.09
+                    output.KiwiSaverAverageInvestmentRateClient = 0.09
+                    output.KiwiSaverAverageInvestmentRateSpouse = 0.09
                     output.LifeExpectancyAverage = 88
-                    output.KiwiSaverEmployeeContribution = 0.03
-                    output.KiwiSaverEmployerContribution = 0.03
+                    output.KiwiSaverEmployeeContributionClient = 0.03
+                    output.KiwiSaverEmployeeContributionSpouse = 0.03
+                    output.KiwiSaverEmployerContributionClient = 0.03
+                    output.KiwiSaverEmployerContributionSpouse = 0.03
                     output.ShareBusinessGrowthRate = 0.1
                     output.HomeInterestRate = 0.04
                     output.HomeAnnualAppreciationRate = 0.06
@@ -102,10 +105,15 @@ Partial Class _wealthtracker
         Me.CashSavingsInterestRate.Text = (output.CashSavingsInterestRate * 100).ToString("#,##0")
         Me.TotalCashSavingsAtRetirement.Text = output.TotalCashSavingsAtRetirement.ToString("#,##0")
 
-        Me.KiwiSaverAmount.Text = output.KiwiSaverAmount.ToString("#,##0")
-        Me.KiwiSaverEmployeeContribution.Text = (output.KiwiSaverEmployeeContribution * 100).ToString("#,##0")
-        Me.KiwiSaverAverageInvestmentRate.Text = (output.KiwiSaverAverageInvestmentRate * 100).ToString("#,##0")
-        Me.KiwiSaverTotalAtRetirement.Text = output.KiwiSaverTotalAtRetirement.ToString("#,##0")
+        Me.KiwiSaverAmountClient.Text = output.KiwiSaverAmountClient.ToString("#,##0")
+        Me.KiwiSaverEmployeeContributionClient.Text = (output.KiwiSaverEmployeeContributionClient * 100).ToString("#,##0")
+        Me.KiwiSaverAverageInvestmentRateClient.Text = (output.KiwiSaverAverageInvestmentRateClient * 100).ToString("#,##0")
+        Me.KiwiSaverTotalAtRetirementClient.Text = output.KiwiSaverTotalAtRetirementClient.ToString("#,##0")
+
+        Me.KiwiSaverAmountSpouse.Text = output.KiwiSaverAmountSpouse.ToString("#,##0")
+        Me.KiwiSaverEmployeeContributionSpouse.Text = (output.KiwiSaverEmployeeContributionSpouse * 100).ToString("#,##0")
+        Me.KiwiSaverAverageInvestmentRateSpouse.Text = (output.KiwiSaverAverageInvestmentRateSpouse * 100).ToString("#,##0")
+        Me.KiwiSaverTotalAtRetirementSpouse.Text = output.KiwiSaverTotalAtRetirementSpouse.ToString("#,##0")
 
         Me.CurrentShareBusiness.Text = output.CurrentShareBusiness.ToString("#,##0")
         Me.ShareBusinessGrowthRate.Text = (output.ShareBusinessGrowthRate * 100).ToString("#,##0")
@@ -140,7 +148,7 @@ Partial Class _wealthtracker
 
     End Sub
 
-    Protected Sub btnUpdateChart_Click(sender As Object, e As EventArgs) Handles btnUpdateChart.Click
+    Protected Sub btnUpdateChart_Click(sender As Object, e As EventArgs) Handles btnUpdateChart.Click, InvestmentPropertySave1.Click, InvestmentPropertySave2.Click, InvestmentPropertySave3.Click, InvestmentPropertySave4.Click, InvestmentPropertySave5.Click, InvestmentPropertySave6.Click, InvestmentPropertySave7.Click, InvestmentPropertySave8.Click, InvestmentPropertySave9.Click, InvestmentPropertySave10.Click, InvestmentPropertySave11.Click, InvestmentPropertySave12.Click, InvestmentPropertySave13.Click, InvestmentPropertySave14.Click, InvestmentPropertySave15.Click, InvestmentPropertySave16.Click, InvestmentPropertySave17.Click, InvestmentPropertySave18.Click, InvestmentPropertySave19.Click, InvestmentPropertySave20.Click
         ' get model from session
         Dim output As New WealthTrackerOutputModel
         If Not (HttpContext.Current.Session.Item("WEALTHTRACKER_CURRENTOBJECT") Is Nothing) Then
@@ -164,6 +172,7 @@ Partial Class _wealthtracker
 
     Private Sub UpdateModelFromUpdatableFields(ByRef _output As WealthTrackerOutputModel)
 
+        _output.TotalAnnualIncome = Me.TotalAnnualIncome.Text
         _output.YearsToRetirement = Me.YearsToRetirement.Text
         _output.InflationRate = Me.InflationRate.Text
         _output.InflationRate = _output.InflationRate / 100
@@ -171,11 +180,16 @@ Partial Class _wealthtracker
         _output.AnnualCashSavingsContributions = Me.AnnualCashSavingsContributions.Text
         _output.CashSavingsInterestRate = Me.CashSavingsInterestRate.Text
         _output.CashSavingsInterestRate = _output.CashSavingsInterestRate / 100
-        _output.KiwiSaverAmount = Me.KiwiSaverAmount.Text
-        _output.KiwiSaverEmployeeContribution = Me.KiwiSaverEmployeeContribution.Text
-        _output.KiwiSaverEmployeeContribution = _output.KiwiSaverEmployeeContribution / 100
-        _output.KiwiSaverAverageInvestmentRate = Me.KiwiSaverAverageInvestmentRate.Text
-        _output.KiwiSaverAverageInvestmentRate = _output.KiwiSaverAverageInvestmentRate / 100
+        _output.KiwiSaverAmountClient = Me.KiwiSaverAmountClient.Text
+        _output.KiwiSaverEmployeeContributionClient = Me.KiwiSaverEmployeeContributionClient.Text
+        _output.KiwiSaverEmployeeContributionClient = _output.KiwiSaverEmployeeContributionClient / 100
+        _output.KiwiSaverAverageInvestmentRateClient = Me.KiwiSaverAverageInvestmentRateClient.Text
+        _output.KiwiSaverAverageInvestmentRateClient = _output.KiwiSaverAverageInvestmentRateClient / 100
+        _output.KiwiSaverAmountSpouse = Me.KiwiSaverAmountSpouse.Text
+        _output.KiwiSaverEmployeeContributionSpouse = Me.KiwiSaverEmployeeContributionSpouse.Text
+        _output.KiwiSaverEmployeeContributionSpouse = _output.KiwiSaverEmployeeContributionSpouse / 100
+        _output.KiwiSaverAverageInvestmentRateSpouse = Me.KiwiSaverAverageInvestmentRateSpouse.Text
+        _output.KiwiSaverAverageInvestmentRateSpouse = _output.KiwiSaverAverageInvestmentRateSpouse / 100
         _output.ShareBusinessGrowthRate = Me.ShareBusinessGrowthRate.Text
         _output.ShareBusinessGrowthRate = _output.ShareBusinessGrowthRate / 100
         _output.HomeInterestRate = Me.HomeInterestRate.Text
@@ -293,4 +307,5 @@ Partial Class _wealthtracker
         Next
 
     End Sub
+
 End Class

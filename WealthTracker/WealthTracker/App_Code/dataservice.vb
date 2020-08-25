@@ -33,15 +33,33 @@ Public Class dataservice
 
     <Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
     <WebMethod(EnableSession:=True)>
-    Public Function GetKiwiSaver() As List(Of KiwiSaverData)
+    Public Function GetKiwiSaverClient() As List(Of KiwiSaverData)
 
         Dim retval As New List(Of KiwiSaverData)
 
         Dim output As New WealthTrackerOutputModel
         If Not (HttpContext.Current.Session.Item("WEALTHTRACKER_CURRENTOBJECT") Is Nothing) Then
             output = Session.Item("WEALTHTRACKER_CURRENTOBJECT")
-            If Not (output.KiwiSaverList Is Nothing) Then
-                retval = output.KiwiSaverList
+            If Not (output.KiwiSaverListClient Is Nothing) Then
+                retval = output.KiwiSaverListClient
+            End If
+        End If
+
+        Return retval
+
+    End Function
+
+    <Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
+    <WebMethod(EnableSession:=True)>
+    Public Function GetKiwiSaverSpouse() As List(Of KiwiSaverData)
+
+        Dim retval As New List(Of KiwiSaverData)
+
+        Dim output As New WealthTrackerOutputModel
+        If Not (HttpContext.Current.Session.Item("WEALTHTRACKER_CURRENTOBJECT") Is Nothing) Then
+            output = Session.Item("WEALTHTRACKER_CURRENTOBJECT")
+            If Not (output.KiwiSaverListSpouse Is Nothing) Then
+                retval = output.KiwiSaverListSpouse
             End If
         End If
 

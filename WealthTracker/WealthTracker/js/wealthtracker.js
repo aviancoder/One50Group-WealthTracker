@@ -56,23 +56,34 @@ $(document).ready(function () {
         series: [
             { stack: 1, type: 'area', name: 'Cash', data: [], lineWidth: 0 },
             { stack: 1, type: 'area', name: 'Share / Business', data: [], lineWidth: 0 },
-            { stack: 1, type: 'area', name: 'Kiwi Saver', data: [], lineWidth: 0 },
+            { stack: 1, type: 'area', name: 'Kiwi Saver Client', data: [], lineWidth: 0 },
+            { stack: 1, type: 'area', name: 'Kiwi Saver Spouse', data: [], lineWidth: 0 },
             { stack: 1, type: 'area', name: 'Home', data: [], lineWidth: 0 },
             { stack: 1, type: 'area', name: 'Investment / Inheritance', data: [], lineWidth: 0 },
             { stack: 2, type: 'spline', name: 'Debt', data: [], lineWidth: 4 },
             {
                 stack: 3, type: 'spline', name: 'Current Assets', data: [], lineWidth: 4
                 , dataLabels: {
+                    style: {
+                        textShadow: false,
+                        textOutline: '1px #FFFFFF',
+                        color: '#000000'
+                    },
                     formatter: function () {
-                        return '<b>' + this.series.name + ' $' + Highcharts.numberFormat(this.y, 0, '.', ',') + '</b>';
+                        return '<span style="color: #000000;>' + this.series.name + ' $' + Highcharts.numberFormat(this.y, 0, '.', ',') + '</span>';
                     }
                 }
             },
             {
                 stack: 4, type: 'spline', name: 'Financial Goal', data: [], lineWidth: 4
                 , dataLabels: {
+                    style: {
+                        textShadow: false,
+                        textOutline: '1px #FFFFFF',
+                        color: '#000000'
+                    },
                     formatter: function () {
-                        return '<b>' + this.series.name + ' $' + Highcharts.numberFormat(this.y, 0, '.', ',') + '</b>';
+                        return '<span style="color: #000000;>' + this.series.name + ' $' + Highcharts.numberFormat(this.y, 0, '.', ',') + '</span>';
                     }
                 }
             }
@@ -89,7 +100,8 @@ function requestData() {
     //Test();
     getCash();
     getShareBusiness();
-    getKiwiSaver();
+    getKiwiSaverClient();
+    getKiwiSaverSpouse();
     getHome();
     getInvestmentInheritance();
     getCurrentAssets();
@@ -157,9 +169,9 @@ function getShareBusiness() {
     });
 }
 
-function getKiwiSaver() {
+function getKiwiSaverClient() {
     $.ajax({
-        url: '/dataservice.asmx/GetKiwiSaver',
+        url: '/dataservice.asmx/GetKiwiSaverClient',
         type: "POST",
         dataType: "json",
         contentType: 'application/json',
@@ -177,6 +189,27 @@ function getKiwiSaver() {
     });
 }
 
+function getKiwiSaverSpouse() {
+    $.ajax({
+        url: '/dataservice.asmx/GetKiwiSaverSpouse',
+        type: "POST",
+        dataType: "json",
+        contentType: 'application/json',
+        data: {},
+        success: function (data) {
+            data = data["d"];
+            var dataItems = new Array();
+            data.forEach(function (arrayItem) {
+                dataItems.push(arrayItem.CumulativeKiwiSaver);
+            });
+            chart.series[3].setData(dataItems, false);
+            chart.redraw();
+        },
+        cache: false
+    });
+}
+
+
 function getHome() {
     $.ajax({
         url: '/dataservice.asmx/GetHome',
@@ -190,7 +223,7 @@ function getHome() {
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.NetPropertyWealth);
             });
-            chart.series[3].setData(dataItems, false);
+            chart.series[4].setData(dataItems, false);
             chart.redraw();
         },
         cache: false
@@ -210,7 +243,7 @@ function getInvestmentInheritance() {
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeInheritanceInvestment);
             });
-            chart.series[4].setData(dataItems, false);
+            chart.series[5].setData(dataItems, false);
             chart.redraw();
         },
         cache: false
@@ -229,9 +262,9 @@ function getDebt() {
             data = data["d"];
             var dataItems = new Array();
             data.forEach(function (arrayItem) {
-                dataItems.push(arrayItem.CumulativeCurrentDebt);
+                dataItems.push(-arrayItem.CumulativeCurrentDebt);
             });
-            chart.series[5].setData(dataItems, false);
+            chart.series[6].setData(dataItems, false);
             chart.redraw();
         },
         cache: false
@@ -251,9 +284,9 @@ function getCurrentAssets() {
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeCurrentAssets);
             });
-            chart.series[6].setData(dataItems, false);
+            chart.series[7].setData(dataItems, false);
             chart.redraw();
-            chart.series[6].points[chart.series[6].points.length - 1].update({
+            chart.series[7].points[chart.series[7].points.length - 1].update({
                 dataLabels: { enabled: true }
             });
         },
@@ -274,11 +307,10 @@ function getFinancialGoal() {
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeFinancialGoal);
             });
-            chart.series[7].setData(dataItems, false);
+            chart.series[8].setData(dataItems, false);
             chart.redraw();
-            chart.series[7].points[chart.series[7].points.length - 1].update({
+            chart.series[8].points[chart.series[8].points.length - 1].update({
                 dataLabels: { enabled: true },
-                color: '#000000'
             });
         },
         cache: false

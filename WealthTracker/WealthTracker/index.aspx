@@ -42,20 +42,22 @@
                 <table class="table table-borderless" style="background-color: #fff;">
                     <thead class="thead-light">
                         <tr>
-                            <th colspan="3">Personal Details</th>
+                            <th colspan="4">Personal Details</th>
                         </tr>
                     </thead>
                     <tr>
                         <th></th>
                         <th>Client</th>
                         <th>Spouse</th>
+                        <th></th>
                     </tr>
                     <tr>
                         <td><span>Name</span></td>
                         <td>
-                            <asp:TextBox ID="ClientName" runat="server" Text="Arnel Aves" class="form-control"></asp:TextBox></td>
+                            <asp:TextBox ID="ClientName" runat="server" Text="Jon Snow" class="form-control"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseName" runat="server" Text="Joarren Aves" class="form-control"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseName" runat="server" Text="Daenerys Targaryen" class="form-control"></asp:TextBox></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><span>Date of Birth</span></td>
@@ -63,16 +65,18 @@
                             <asp:TextBox ID="ClientDateOfBirth" runat="server" Text="1970-01-01" class="form-control  text-right" type="date"></asp:TextBox></td>
                         <td>
                             <asp:TextBox ID="SpouseDateOfBirth" runat="server" Text="1975-02-02" class="form-control  text-right" type="date"></asp:TextBox></td>
+                        <td></td>
                     </tr>
                     <thead class="thead-light">
                         <tr>
-                            <th colspan="3">Current Assets</th>
+                            <th colspan="4">Current Assets</th>
                         </tr>
                     </thead>
                     <tr>
                         <th></th>
                         <th>Client</th>
                         <th>Spouse</th>
+                        <th></th>
                     </tr>
                     <tr>
                         <td><span>Gross Income</span></td>
@@ -80,13 +84,15 @@
                             <asp:TextBox ID="ClientGrossIncome" runat="server" Text="80,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
                             <asp:TextBox ID="SpouseGrossIncome" runat="server" Text="50,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><span>Cash Savings</span></td>
                         <td>
                             <asp:TextBox ID="ClientCashSavings" runat="server" Text="200,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
-                            <asp:TextBox ID="SpouseCashSavings" runat="server" Text="30,0000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            <asp:TextBox ID="SpouseCashSavings" runat="server" Text="300,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><span>Kiwi Saver</span></td>
@@ -94,6 +100,7 @@
                             <asp:TextBox ID="ClientKiwiSaver" runat="server" Text="20,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
                             <asp:TextBox ID="SpouseKiwiSaver" runat="server" Text="20,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><span>Share / Investments</span></td>
@@ -101,11 +108,13 @@
                             <asp:TextBox ID="ClientShareInvestments" runat="server" Text="25,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td>
                             <asp:TextBox ID="SpouseShareInvestments" runat="server" Text="25,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><span>Property Value</span></td>
                         <td>
                             <asp:TextBox ID="ClientPropertyValue" runat="server" Text="1,000,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                        <td></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -113,16 +122,18 @@
                         <td>
                             <asp:TextBox ID="ClientMortgage" runat="server" Text="600,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
                         <td></td>
+                        <td></td>
                     </tr>
                     <thead class="thead-light">
                         <tr>
-                            <th colspan="3">Current Debts</th>
+                            <th colspan="4">Current Debts</th>
                         </tr>
                     </thead>
                     <tr>
                         <th></th>
                         <th>Client</th>
                         <th>Spouse</th>
+                        <th>Interest Rate</th>
                     </tr>
                     <tr>
                         <td><span>Credit Cards</span></td>
@@ -171,12 +182,13 @@
                     </tr>
                     <thead class="thead-light">
                         <tr>
-                            <th colspan="3">Click the button below to proceed</th>
+                            <th colspan="4">Click the button below to proceed</th>
                         </tr>
                     </thead>
                     <tr>
                         <td colspan="1" class="text-right"></td>
                         <td colspan="1" class="text-right"></td>
+                       <td colspan="1" class="text-right"></td>
                         <td colspan="1" class="text-right">
                             <input class="form-control ui-button-text" type="submit" name="BtnSubmit" title="Submit" /></td>
                     </tr>

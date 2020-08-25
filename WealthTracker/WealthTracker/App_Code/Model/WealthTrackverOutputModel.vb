@@ -30,17 +30,23 @@ Namespace WealthTracker.Models
         Public Property NetHomeValueAtRetirement As Double
         Public Property HomeList As List(Of PropertyData)
         Public Property BasicDetails As BasicDetails
-        Public Property KiwiSaverAmount As Double
-        Public Property KiwiSaverTotalAtRetirement As Double
-        Public Property KiwiSaverAverageInvestmentRate As Double
-        Public Property KiwiSaverEmployeeContribution As Double
-        Public Property KiwiSaverEmployerContribution As Double
+        Public Property KiwiSaverAmountClient As Double
+        Public Property KiwiSaverTotalAtRetirementClient As Double
+        Public Property KiwiSaverAverageInvestmentRateClient As Double
+        Public Property KiwiSaverEmployeeContributionClient As Double
+        Public Property KiwiSaverEmployerContributionClient As Double
+        Public Property KiwiSaverAmountSpouse As Double
+        Public Property KiwiSaverTotalAtRetirementSpouse As Double
+        Public Property KiwiSaverAverageInvestmentRateSpouse As Double
+        Public Property KiwiSaverEmployeeContributionSpouse As Double
+        Public Property KiwiSaverEmployerContributionSpouse As Double
         Public Property LifeExpectancyAverage As Double
         Public Property TotalLivingExpensesAverage As Double
         Public Property TotalSuperAmount As Double
         Public Property EstimatedTotalKiwiSaverAmount As Double
         Public Property SurplusShortfallAmount As Double
-        Public Property KiwiSaverList As List(Of KiwiSaverData)
+        Public Property KiwiSaverListClient As List(Of KiwiSaverData)
+        Public Property KiwiSaverListSpouse As List(Of KiwiSaverData)
         Public Property NetAssetsRequired As Double
         Public Property NetAssetsReturnOnInvestment As Double
         Public Property TotalNetAssetsRequired As Double
