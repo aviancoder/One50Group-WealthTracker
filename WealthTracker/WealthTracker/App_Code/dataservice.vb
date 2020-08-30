@@ -213,6 +213,24 @@ Public Class dataservice
 
     <Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
     <WebMethod(EnableSession:=True)>
+    Public Function GetCurrentInvestmentProperties() As List(Of InvestmentPropertyData)
+
+        Dim retval As New List(Of InvestmentPropertyData)
+
+        Dim output As New WealthTrackerOutputModel
+        If Not (HttpContext.Current.Session.Item("WEALTHTRACKER_CURRENTOBJECT") Is Nothing) Then
+            output = Session.Item("WEALTHTRACKER_CURRENTOBJECT")
+            If Not (output.CurrentInvestmentPropertyList Is Nothing) Then
+                retval = output.CurrentInvestmentPropertyList
+            End If
+        End If
+
+        Return retval
+
+    End Function
+
+    <Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
+    <WebMethod(EnableSession:=True)>
     Public Function GetInvestmentProperties() As List(Of InvestmentPropertyData)
 
         Dim retval As New List(Of InvestmentPropertyData)

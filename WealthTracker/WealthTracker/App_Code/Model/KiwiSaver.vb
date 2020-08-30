@@ -7,6 +7,7 @@ Namespace WealthTracker.Models
 
     Public Class KiwiSaverData
         Public Property YearsToRetire As Integer
+        Public Property KiwiSaverName As String
         Public Property CombinedSalary As Double
         Public Property CumulativeKiwiSaver As Double
     End Class

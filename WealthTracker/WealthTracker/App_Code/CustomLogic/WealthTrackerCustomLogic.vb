@@ -59,7 +59,7 @@ Namespace WealthTracker.CustomLogic
             If (_output.KiwiSaverAmountClient > 0) Then
                 _output.TotalLivingExpensesAverage = 650 * 52 * (_output.LifeExpectancyAverage - _retirementAge)
                 _output.TotalSuperAmount = 375 * 52 * (_output.LifeExpectancyAverage - _retirementAge)
-                Dim klist As List(Of KiwiSaverData) = GetKiwiSaverTable(_output.BasicDetails.ClientGrossIncome, _output, _output.KiwiSaverAmountClient, _output.KiwiSaverEmployeeContributionClient, _output.KiwiSaverEmployerContributionClient, _output.KiwiSaverAverageInvestmentRateClient)
+                Dim klist As List(Of KiwiSaverData) = GetKiwiSaverTable(_output.BasicDetails.ClientGrossIncome, _output, _output.KiwiSaverAmountClient, _output.KiwiSaverEmployeeContributionClient, _output.KiwiSaverEmployerContributionClient, _output.KiwiSaverAverageInvestmentRateClient, _output.BasicDetails.ClientName)
                 _output.KiwiSaverListClient = klist
                 Dim yearsToRetirement As Integer = _output.YearsToRetirement
                 Dim kdata = klist.Where(Function(x) x.YearsToRetire = yearsToRetirement).FirstOrDefault()
@@ -75,7 +75,7 @@ Namespace WealthTracker.CustomLogic
             If (_output.KiwiSaverAmountSpouse > 0) Then
                 _output.TotalLivingExpensesAverage = 650 * 52 * (_output.LifeExpectancyAverage - _retirementAge)
                 _output.TotalSuperAmount = 375 * 52 * (_output.LifeExpectancyAverage - _retirementAge)
-                Dim klist As List(Of KiwiSaverData) = GetKiwiSaverTable(_output.BasicDetails.SpouseGrossIncome, _output, _output.KiwiSaverAmountSpouse, _output.KiwiSaverEmployeeContributionSpouse, _output.KiwiSaverEmployerContributionSpouse, _output.KiwiSaverAverageInvestmentRateSpouse)
+                Dim klist As List(Of KiwiSaverData) = GetKiwiSaverTable(_output.BasicDetails.SpouseGrossIncome, _output, _output.KiwiSaverAmountSpouse, _output.KiwiSaverEmployeeContributionSpouse, _output.KiwiSaverEmployerContributionSpouse, _output.KiwiSaverAverageInvestmentRateSpouse, _output.BasicDetails.SpouseName)
                 _output.KiwiSaverListSpouse = klist
                 Dim yearsToRetirement As Integer = _output.YearsToRetirement
                 Dim kdata = klist.Where(Function(x) x.YearsToRetire = yearsToRetirement).FirstOrDefault()
@@ -185,10 +185,30 @@ Namespace WealthTracker.CustomLogic
             End If
         End Sub
 
+        Public Sub FillCurrentInvestmentProperty(ByRef _output As WealthTrackerOutputModel)
+            Dim dataList As New List(Of InvestmentPropertyData)
+            For i As Integer = 0 To _output.CurrentInvestmentPropertyList.Count - 1
+                Dim mdata As InvestmentPropertyData = _output.CurrentInvestmentPropertyList.Item(i)
+
+                ' get monthly interest repayments
+                Dim monthlyInterestRepayments As Double = (mdata.InvestmentPropertyValue * mdata.InvestmentPropertyMortgageRate) / 12
+                mdata.InvestmentPropertyMonthlyInterestRepayments = monthlyInterestRepayments
+
+                FillInvestmentPropertyData(_output, mdata)
+                dataList.Add(mdata)
+            Next
+            _output.CurrentInvestmentPropertyList = dataList
+        End Sub
+
         Public Sub FillInvestmentProperty(ByRef _output As WealthTrackerOutputModel)
             Dim dataList As New List(Of InvestmentPropertyData)
             For i As Integer = 0 To _output.InvestmentPropertyList.Count - 1
                 Dim mdata As InvestmentPropertyData = _output.InvestmentPropertyList.Item(i)
+
+                ' get monthly interest repayments
+                Dim monthlyInterestRepayments As Double = (mdata.InvestmentPropertyValue * mdata.InvestmentPropertyMortgageRate) / 12
+                mdata.InvestmentPropertyMonthlyInterestRepayments = monthlyInterestRepayments
+
                 FillInvestmentPropertyData(_output, mdata)
                 dataList.Add(mdata)
             Next
@@ -198,7 +218,7 @@ Namespace WealthTracker.CustomLogic
         Public Sub FillInvestmentPropertyData(ByRef _output As WealthTrackerOutputModel, ByRef _mdata As InvestmentPropertyData)
             If (String.IsNullOrEmpty(_mdata.InvestmentPropertyName) = False) Then
                 Dim yearsToRetirement As Integer = _output.YearsToRetirement
-                Dim pList As List(Of PropertyData) = GetPropertyTable(_mdata.InvestmentPropertyValue, _output.HomeAnnualAppreciationRate, _mdata.InvestmentPropertyPurchaseYear + 1, _mdata.InvestmentPropertyDebt, _output.HomeInterestRate, _mdata.InvestmentPropertyYearsToRepayDebt, _mdata.InvestmentPropertyRepaymentsBeginYear, yearsToRetirement)
+                Dim pList As List(Of PropertyData) = GetPropertyTable(_mdata.InvestmentPropertyValue, _mdata.InvestmentPropertyAnnualAppreciationRate, _mdata.InvestmentPropertyPurchaseYear + 1, _mdata.InvestmentPropertyDebt, _mdata.InvestmentPropertyMortgageRate, _mdata.InvestmentPropertyYearsToRepayDebt, _mdata.InvestmentPropertyRepaymentsBeginYear, yearsToRetirement)
                 _mdata.InvestmentPropertyList = pList
                 If (pList.Count() > 0) Then
                     _mdata.InvestmentPropertyMonthlyRepayments = pList.Item(0).YearlyPayment / 12
@@ -209,12 +229,13 @@ Namespace WealthTracker.CustomLogic
         End Sub
 
         Public Sub FillCurrentAssetsData(ByRef _output As WealthTrackerOutputModel)
+
             Dim dataList As New List(Of CurrentAssetsData)()
             Dim csList As List(Of CashSavingsData) = _output.CashSavingsList
             Dim sbList As List(Of ShareBusinessData) = _output.ShareBusinessList
             Dim kListClient As List(Of KiwiSaverData) = _output.KiwiSaverListClient
             Dim kListSpouse As List(Of KiwiSaverData) = _output.KiwiSaverListSpouse
-            Dim hList As List(Of PropertyData) = _output.HomeList
+            'Dim hList As List(Of PropertyData) = _output.HomeList
             Dim iiList As List(Of InheritanceInvestmentData) = _output.InheritanceInvestmentList
             Dim dList As List(Of CurrentDebtData) = _output.CurrentDebtList
 
@@ -230,8 +251,10 @@ Namespace WealthTracker.CustomLogic
                 If (Not (kDataClient Is Nothing)) Then currentAssetAmount += kDataClient.CumulativeKiwiSaver
                 Dim kDataSpouse = kListSpouse.Where(Function(x) x.YearsToRetire = idx).FirstOrDefault()
                 If (Not (kDataSpouse Is Nothing)) Then currentAssetAmount += kDataSpouse.CumulativeKiwiSaver
-                Dim hData = hList.Where(Function(x) x.YearsToRetire = idx).FirstOrDefault()
-                If (Not (hData Is Nothing)) Then currentAssetAmount += hData.NetPropertyWealth
+
+                'get current properties
+                currentAssetAmount += GetCurrentInvestmentPropertiesTotalByYear(_output, idx)
+
                 Dim iiData = iiList.Where(Function(x) x.YearsToRetire = idx).FirstOrDefault()
                 If (Not (iiData Is Nothing)) Then currentAssetAmount += iiData.CumulativeInheritanceInvestment
                 Dim dData = dList.Where(Function(x) x.YearsToRetire = idx).FirstOrDefault()
@@ -252,8 +275,13 @@ Namespace WealthTracker.CustomLogic
             netAssetsRequired = _output.TotalAnnualIncomeForRetirement / _output.NetAssetsReturnOnInvestment
             _output.NetAssetsRequired = netAssetsRequired
 
-            Dim initialFinancialGoal As Double = _output.HomeProperty + ((_output.TotalAnnualIncome - defaultPensionAmount) / 0.05)
-            Dim fvHome As Double = GetFutureValue(_output.HomeProperty, _output.HomeAnnualAppreciationRate, _output.YearsToRetirement)
+            'current home value
+            Dim ciValue = GetCurrentInvestmentValue(_output)
+
+            Dim initialFinancialGoal As Double = ciValue + ((_output.TotalAnnualIncome - defaultPensionAmount) / 0.05)
+            ' get current properties financial goal
+            Dim fvHome As Double = GetCurrentInvestmentFinancialGoalValue(_output)
+
             Dim finalFinancialGoal = netAssetsRequired + fvHome
             _output.TotalNetAssetsRequired = finalFinancialGoal
 
@@ -284,7 +312,7 @@ Namespace WealthTracker.CustomLogic
 
 #Region "Table Generation"
 
-        Public Function GetKiwiSaverTable(ByVal _salaryNow As Double, ByRef _output As WealthTrackerOutputModel, ByVal _initialKiwiSaverAmount As Double, ByVal _kiwiSaverEmployeeContribution As Double, ByVal _kiwiSaverEmployerContribution As Double, ByVal _kiwiSaverAverageInvestmentRate As Double) As List(Of KiwiSaverData)
+        Public Function GetKiwiSaverTable(ByVal _salaryNow As Double, ByRef _output As WealthTrackerOutputModel, ByVal _initialKiwiSaverAmount As Double, ByVal _kiwiSaverEmployeeContribution As Double, ByVal _kiwiSaverEmployerContribution As Double, ByVal _kiwiSaverAverageInvestmentRate As Double, ByVal _kiwiSaverName As String) As List(Of KiwiSaverData)
             Dim retval As New List(Of KiwiSaverData)()
             Dim cumulativeCombinedSalary As Double = _salaryNow
             Dim clientContribution As Double = cumulativeCombinedSalary * _kiwiSaverEmployeeContribution
@@ -299,6 +327,7 @@ Namespace WealthTracker.CustomLogic
 
             For i As Integer = 1 To _output.YearsToRetirement
                 Dim data As KiwiSaverData = New KiwiSaverData()
+                data.KiwiSaverName = _kiwiSaverName
                 data.YearsToRetire = i
                 data.CombinedSalary = cumulativeCombinedSalary
                 cumulativeCombinedSalary += cumulativeCombinedSalary * _output.InflationRate
@@ -419,6 +448,7 @@ Namespace WealthTracker.CustomLogic
             initialData.RepaymentsYear = 0
             initialData.StartingBalance = _presentValue
             initialData.EndingBalance = _presentValue
+            initialData.Payment = yearlyMortgage
             retval.Add(initialData)
 
             For i As Integer = 1 To _numberOfYears
@@ -441,7 +471,6 @@ Namespace WealthTracker.CustomLogic
 
             Return retval
         End Function
-
 
         Public Function GenerateDebtTable(ByVal _presentValue As Double, ByVal _interestRate As Double, ByVal _numberOfYears As Integer) As List(Of MortgageData)
             Dim retval As New List(Of MortgageData)()
@@ -509,6 +538,40 @@ Namespace WealthTracker.CustomLogic
 #End Region
 
 #Region "Miscellaneous"
+
+        Public Function GetCurrentInvestmentPropertiesTotalByYear(ByVal _output As WealthTrackerOutputModel, ByVal _year As Integer) As Double
+            Dim retval As Double = 0
+
+            For Each ip As InvestmentPropertyData In _output.CurrentInvestmentPropertyList
+                Dim hData = ip.InvestmentPropertyList.Where(Function(x) x.YearsToRetire = _year).FirstOrDefault()
+                If (Not (hData Is Nothing)) Then retval += hData.NetPropertyWealth
+            Next
+
+            Return retval
+        End Function
+
+        Public Function GetCurrentInvestmentFinancialGoalValue(ByVal _output As WealthTrackerOutputModel) As Double
+            Dim retval As Double = 0
+
+            For Each ip As InvestmentPropertyData In _output.CurrentInvestmentPropertyList
+                If (ip.InvestmentPropertyValue > 0) Then
+                    Dim fv As Double = GetFutureValue(ip.InvestmentPropertyValue, ip.InvestmentPropertyAnnualAppreciationRate, _output.YearsToRetirement)
+                    retval += fv
+                End If
+            Next
+
+            Return retval
+        End Function
+
+        Public Function GetCurrentInvestmentValue(ByVal _output As WealthTrackerOutputModel) As Double
+            Dim retval As Double = 0
+
+            For Each ip As InvestmentPropertyData In _output.CurrentInvestmentPropertyList
+                retval += ip.InvestmentPropertyValue
+            Next
+
+            Return retval
+        End Function
 
         Public Function GetFutureValue(ByVal _presentValue As Double, ByVal _interestRate As Double, ByVal _numberOfYears As Integer) As Double
             Dim retval As Double = _presentValue

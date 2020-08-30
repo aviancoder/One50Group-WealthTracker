@@ -39,160 +39,216 @@
     <div class="container">
         <main role="main" class="pb-3">
             <form id="formMain" runat="server" action="wealthtracker.aspx">
-                <table class="table table-borderless" style="background-color: #fff;">
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="4">Personal Details</th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <th></th>
-                        <th>Client</th>
-                        <th>Spouse</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td><span>Name</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientName" runat="server" Text="Jon Snow" class="form-control"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="SpouseName" runat="server" Text="Daenerys Targaryen" class="form-control"></asp:TextBox></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><span>Date of Birth</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientDateOfBirth" runat="server" Text="1970-01-01" class="form-control  text-right" type="date"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="SpouseDateOfBirth" runat="server" Text="1975-02-02" class="form-control  text-right" type="date"></asp:TextBox></td>
-                        <td></td>
-                    </tr>
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="4">Current Assets</th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <th></th>
-                        <th>Client</th>
-                        <th>Spouse</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td><span>Gross Income</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientGrossIncome" runat="server" Text="80,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="SpouseGrossIncome" runat="server" Text="50,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><span>Cash Savings</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientCashSavings" runat="server" Text="200,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="SpouseCashSavings" runat="server" Text="300,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><span>Kiwi Saver</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientKiwiSaver" runat="server" Text="20,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="SpouseKiwiSaver" runat="server" Text="20,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><span>Share / Investments</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientShareInvestments" runat="server" Text="25,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="SpouseShareInvestments" runat="server" Text="25,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><span>Property Value</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientPropertyValue" runat="server" Text="1,000,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><span>Mortgage</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientMortgage" runat="server" Text="600,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="4">Current Debts</th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <th></th>
-                        <th>Client</th>
-                        <th>Spouse</th>
-                        <th>Interest Rate</th>
-                    </tr>
-                    <tr>
-                        <td><span>Credit Cards</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientDebtCreditCard" runat="server" Text="80,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="SpouseDebtCreditCard" runat="server" Text="50,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="DebtCreditCardRate" runat="server" Text="4" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                    </tr>
-                     <tr>
-                        <td><span>Hire Purchase</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientDebtHire" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="SpouseDebtHire" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="DebtHireRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td><span>Personal Loans</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientDebtPersonal" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="SpouseDebtPersonal" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="DebtPersonalRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td><span>Vehicle Finance</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientDebtVehicle" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="SpouseDebtVehicle" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="DebtVehicleRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td><span>Other</span></td>
-                        <td>
-                            <asp:TextBox ID="ClientDebtOther" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="SpouseDebtOther" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                        <td>
-                            <asp:TextBox ID="DebtHOtherRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
-                    </tr>
-                    <thead class="thead-light">
-                        <tr>
-                            <th colspan="4">Click the button below to proceed</th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <td colspan="1" class="text-right"></td>
-                        <td colspan="1" class="text-right"></td>
-                       <td colspan="1" class="text-right"></td>
-                        <td colspan="1" class="text-right">
-                            <input class="form-control ui-button-text" type="submit" name="BtnSubmit" title="Submit" /></td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <div class="col-md-12 mb-4 pr-md-1">
+                        <table class="table table-borderless" style="background-color: #fff;">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="4">Personal Details</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <th></th>
+                                <th>Client</th>
+                                <th>Spouse</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td><span>Name</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientName" runat="server" Text="Jon Snow" class="form-control"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="SpouseName" runat="server" Text="Daenerys Targaryen" class="form-control"></asp:TextBox></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><span>Date of Birth</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientDateOfBirth" runat="server" Text="1970-01-01" class="form-control  text-right" type="date"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="SpouseDateOfBirth" runat="server" Text="1975-02-02" class="form-control  text-right" type="date"></asp:TextBox></td>
+                                <td></td>
+                            </tr>
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="4">Current Assets</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <th></th>
+                                <th>Client</th>
+                                <th>Spouse</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td><span>Gross Income</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientGrossIncome" runat="server" Text="80,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="SpouseGrossIncome" runat="server" Text="50,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><span>Cash Savings</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientCashSavings" runat="server" Text="200,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="SpouseCashSavings" runat="server" Text="300,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><span>Kiwi Saver</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientKiwiSaver" runat="server" Text="20,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="SpouseKiwiSaver" runat="server" Text="20,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><span>Share / Investments</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientShareInvestments" runat="server" Text="25,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="SpouseShareInvestments" runat="server" Text="25,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th>Debt</th>
+                            </tr>
+                            <tr>
+                                <td><span>Property #1</span></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyName1" runat="server" Text="" class="form-control"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyValue1" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt1" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td><span>Property #2</span></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyName2" runat="server" Text="" class="form-control"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyValue2" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt2" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td><span>Property #3</span></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyName3" runat="server" Text="" class="form-control"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyValue3" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt3" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td><span>Property #4</span></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyName4" runat="server" Text="" class="form-control"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyValue4" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt4" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td><span>Property #5</span></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyName5" runat="server" Text="" class="form-control"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyValue5" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt5" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td><span>Property #6</span></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyName6" runat="server" Text="" class="form-control"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyValue6" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt6" runat="server" Text="" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            </tr>
+<%--                            <tr>
+                                <td><span>Mortgage</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientMortgage" runat="server" Text="600,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td></td>
+                                <td></td>
+                            </tr>--%>
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="4">Current Debts</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <th></th>
+                                <th>Client</th>
+                                <th>Spouse</th>
+                                <th>Interest Rate</th>
+                            </tr>
+                            <tr>
+                                <td><span>Credit Cards</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientDebtCreditCard" runat="server" Text="80,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="SpouseDebtCreditCard" runat="server" Text="50,000" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="DebtCreditCardRate" runat="server" Text="4" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td><span>Hire Purchase</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientDebtHire" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="SpouseDebtHire" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="DebtHireRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td><span>Personal Loans</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientDebtPersonal" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="SpouseDebtPersonal" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="DebtPersonalRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td><span>Vehicle Finance</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientDebtVehicle" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="SpouseDebtVehicle" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="DebtVehicleRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td><span>Other</span></td>
+                                <td>
+                                    <asp:TextBox ID="ClientDebtOther" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="SpouseDebtOther" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                                <td>
+                                    <asp:TextBox ID="DebtHOtherRate" runat="server" Text="0" class="form-control  text-right one50group-formattednumber"></asp:TextBox></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12 mb-4 pr-md-1">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <input class="form-control btn btn-success" type="submit" name="BtnSubmit" title="Submit" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </form>
         </main>
     </div>
@@ -207,5 +263,6 @@
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
     <script src="/js/json2.js"></script>
     <script src="/js/utilities.js"></script>
+    <script src="/js/basicdetails.js"></script>
 </body>
 </html>

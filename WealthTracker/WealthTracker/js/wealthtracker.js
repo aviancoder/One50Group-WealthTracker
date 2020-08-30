@@ -50,48 +50,25 @@ $(document).ready(function () {
                 marker: {
                     enabled: false
                 },
-                stacking: 'normal'
+                stacking: 'normal',
+                dataLabels: {
+                    style: {
+                        textShadow: false,
+                        textOutline: '1px #FFFFFF',
+                        color: '#000000'
+                    },
+                    formatter: function () {
+                        return '<span style="color: #000000;>' + this.series.name + ' $' + Highcharts.numberFormat(this.y, 0, '.', ',') + '</span>';
+                    }
+                }
             }
         },
-        series: [
-            { stack: 1, type: 'area', name: 'Cash', data: [], lineWidth: 0 },
-            { stack: 1, type: 'area', name: 'Share / Business', data: [], lineWidth: 0 },
-            { stack: 1, type: 'area', name: 'Kiwi Saver Client', data: [], lineWidth: 0 },
-            { stack: 1, type: 'area', name: 'Kiwi Saver Spouse', data: [], lineWidth: 0 },
-            { stack: 1, type: 'area', name: 'Home', data: [], lineWidth: 0 },
-            { stack: 1, type: 'area', name: 'Investment / Inheritance', data: [], lineWidth: 0 },
-            { stack: 2, type: 'spline', name: 'Debt', data: [], lineWidth: 4 },
-            {
-                stack: 3, type: 'spline', name: 'Current Assets', data: [], lineWidth: 4
-                , dataLabels: {
-                    style: {
-                        textShadow: false,
-                        textOutline: '1px #FFFFFF',
-                        color: '#000000'
-                    },
-                    formatter: function () {
-                        return '<span style="color: #000000;>' + this.series.name + ' $' + Highcharts.numberFormat(this.y, 0, '.', ',') + '</span>';
-                    }
-                }
-            },
-            {
-                stack: 4, type: 'spline', name: 'Financial Goal', data: [], lineWidth: 4
-                , dataLabels: {
-                    style: {
-                        textShadow: false,
-                        textOutline: '1px #FFFFFF',
-                        color: '#000000'
-                    },
-                    formatter: function () {
-                        return '<span style="color: #000000;>' + this.series.name + ' $' + Highcharts.numberFormat(this.y, 0, '.', ',') + '</span>';
-                    }
-                }
-            }
-        ]
+        series: []
     };
     chart = Highcharts.chart('ChartContainer', options);
 
     initializeInvestmentProperties();
+    initializeCurrentInvestmentProperties();
 });
 
 // Data
@@ -99,17 +76,15 @@ $(document).ready(function () {
 function requestData() {
     //Test();
     getCash();
-    getShareBusiness();
-    getKiwiSaverClient();
-    getKiwiSaverSpouse();
-    getHome();
-    getInvestmentInheritance();
-    getCurrentAssets();
-    //getInvestmentProperty1();
-    //getInvestmentProperty2();
-    getInvestmentProperties();
-    getDebt();
-    getFinancialGoal();
+    //getShareBusiness();
+    //getKiwiSaverClient();
+    //getKiwiSaverSpouse();
+    //getHome();
+    //getInvestmentInheritance();
+    //getCurrentAssets();
+    //getInvestmentProperties();
+    //getDebt();
+    //getFinancialGoal();
 }
 
 function Test() {
@@ -143,12 +118,23 @@ function getCash() {
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeCashSavings);
             });
-            chart.series[0].setData(dataItems, false);
+            chart.addSeries({
+                name: "Cash",
+                data: dataItems,
+                dataLabels: { enabled: false },
+                type: 'area',
+                stack: 1,
+                lineWidth: 0
+            });
             chart.redraw();
+        },
+        complete: function (data, status) {
+            getShareBusiness();
         },
         cache: false
     });
 }
+
 function getShareBusiness() {
     $.ajax({
         url: '/dataservice.asmx/GetShareBusiness',
@@ -162,8 +148,18 @@ function getShareBusiness() {
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeShareBusiness);
             });
-            chart.series[1].setData(dataItems, false);
+            chart.addSeries({
+                name: "Share/Business",
+                data: dataItems,
+                dataLabels: { enabled: false },
+                type: 'area',
+                stack: 1,
+                lineWidth: 0
+            });
             chart.redraw();
+        },
+        complete: function (data, status) {
+            getKiwiSaverClient();
         },
         cache: false
     });
@@ -179,11 +175,23 @@ function getKiwiSaverClient() {
         success: function (data) {
             data = data["d"];
             var dataItems = new Array();
+            var kiwiSaverName = "KiwiSaver"
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeKiwiSaver);
+                kiwiSaverName = arrayItem.KiwiSaverName + " KiwiSaver";
             });
-            chart.series[2].setData(dataItems, false);
+            chart.addSeries({
+                name: kiwiSaverName,
+                data: dataItems,
+                dataLabels: { enabled: false },
+                type: 'area',
+                stack: 1,
+                lineWidth: 0
+            });
             chart.redraw();
+        },
+        complete: function (data, status) {
+            getKiwiSaverSpouse();
         },
         cache: false
     });
@@ -199,16 +207,60 @@ function getKiwiSaverSpouse() {
         success: function (data) {
             data = data["d"];
             var dataItems = new Array();
+            var kiwiSaverName = "KiwiSaver"
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeKiwiSaver);
+                kiwiSaverName = arrayItem.KiwiSaverName + " KiwiSaver";
             });
-            chart.series[3].setData(dataItems, false);
+            chart.addSeries({
+                name: kiwiSaverName,
+                data: dataItems,
+                dataLabels: { enabled: false },
+                type: 'area',
+                stack: 1,
+                lineWidth: 0
+            });
             chart.redraw();
+
+        },
+        complete: function (data, status) {
+            getCurrentInvestmentProperties();
         },
         cache: false
     });
 }
 
+function getCurrentInvestmentProperties() {
+    $.ajax({
+        url: '/dataservice.asmx/GetCurrentInvestmentProperties',
+        type: "POST",
+        dataType: "json",
+        contentType: 'application/json',
+        data: {},
+        success: function (data) {
+            data = data["d"];
+            data.forEach(function (currentInvestmentPropertyData) {
+                var dataItems = new Array();
+                currentInvestmentPropertyData.InvestmentPropertyList.forEach(function (arrayItem) {
+                    dataItems.push(arrayItem.NetPropertyWealth);
+                });
+                chart.addSeries({
+                    name: currentInvestmentPropertyData.InvestmentPropertyName,
+                    data: dataItems,
+                    dataLabels: { enabled: false },
+                    type: 'area',
+                    stack: 1,
+                    lineWidth: 0
+                });
+            });
+            chart.redraw();
+        },
+        complete: function (data, status) {
+            getInvestmentInheritance();
+        },
+        cache: false
+    });
+}
 
 function getHome() {
     $.ajax({
@@ -243,8 +295,18 @@ function getInvestmentInheritance() {
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeInheritanceInvestment);
             });
-            chart.series[5].setData(dataItems, false);
+            chart.addSeries({
+                name: "Investment / Inheritance",
+                data: dataItems,
+                dataLabels: { enabled: false },
+                type: "area",
+                stack: 1,
+                lineWidth: 0
+            });
             chart.redraw();
+        },
+        complete: function (data, status) {
+            getDebt();
         },
         cache: false
     });
@@ -264,8 +326,18 @@ function getDebt() {
             data.forEach(function (arrayItem) {
                 dataItems.push(-arrayItem.CumulativeCurrentDebt);
             });
-            chart.series[6].setData(dataItems, false);
+            chart.addSeries({
+                name: "Debt",
+                data: dataItems,
+                dataLabels: { enabled: false },
+                type: "spline",
+                stack: 2,
+                lineWidth: 4,
+            });
             chart.redraw();
+        },
+        complete: function (data, status) {
+            getCurrentAssets();
         },
         cache: false
     });
@@ -284,11 +356,21 @@ function getCurrentAssets() {
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeCurrentAssets);
             });
-            chart.series[7].setData(dataItems, false);
+            chart.addSeries({
+                name: "Current Assets",
+                data: dataItems,
+                dataLabels: { enabled: false },
+                type: "spline",
+                stack: 3,
+                lineWidth: 4
+            });
             chart.redraw();
-            chart.series[7].points[chart.series[7].points.length - 1].update({
+            chart.series[chart.series.length - 1].points[chart.series[chart.series.length - 1].points.length - 1].update({
                 dataLabels: { enabled: true }
             });
+        },
+        complete: function (data, status) {
+            getFinancialGoal();
         },
         cache: false
     });
@@ -307,11 +389,21 @@ function getFinancialGoal() {
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeFinancialGoal);
             });
-            chart.series[8].setData(dataItems, false);
-            chart.redraw();
-            chart.series[8].points[chart.series[8].points.length - 1].update({
-                dataLabels: { enabled: true },
+            chart.addSeries({
+                name: "Financial Goal",
+                data: dataItems,
+                dataLabels: { enabled: false },
+                type: "spline",
+                stack: 4,
+                lineWidth: 4
             });
+            chart.redraw();
+            chart.series[chart.series.length - 1].points[chart.series[chart.series.length - 1].points.length - 1].update({
+                dataLabels: { enabled: true }
+            });
+        },
+        complete: function (data, status) {
+            getInvestmentProperties();
         },
         cache: false
     });
@@ -341,6 +433,9 @@ function getInvestmentProperties() {
                 });
             });
             chart.redraw();
+        },
+        complete: function (data, status) {
+            // do nothing
         },
         cache: false
     });
@@ -417,6 +512,10 @@ function transferValuesToPredecessor(idx) {
             $("#InvestmentPropertyDebt" + (i + 1)).val("");
             $("#InvestmentPropertyYearsToRepayDebt" + i).val($("#InvestmentPropertyYearsToRepayDebt" + (i + 1)).val());
             $("#InvestmentPropertyYearsToRepayDebt" + (i + 1)).val("");
+            $("#InvestmentPropertyAnnualAppreciationRate" + i).val($("#InvestmentPropertyAnnualAppreciationRate" + (i + 1)).val());
+            $("#InvestmentPropertyAnnualAppreciationRate" + (i + 1)).val("");
+            $("#InvestmentPropertyMortgageRate" + i).val($("#InvestmentPropertyMortgageRate" + (i + 1)).val());
+            $("#InvestmentPropertyMortgageRate" + (i + 1)).val("");
             $("#InvestmentPropertyMonthlyRepayments" + i).text($("#InvestmentPropertyMonthlyRepayments" + (i + 1)).text());
             $("#InvestmentPropertyMonthlyRepayments" + (i + 1)).text("");
             $("#InvestmentPropertyNetHomeValueAtRetirement" + i).text($("#InvestmentPropertyNetHomeValueAtRetirement" + (i + 1)).text());
@@ -443,6 +542,10 @@ function addsaveProperty(idx) {
             $("#InvestmentPropertyDebt" + (idx)).val("0");
         if ($("#InvestmentPropertyYearsToRepayDebt" + (idx)).val().length <= 0)
             $("#InvestmentPropertyYearsToRepayDebt" + (idx)).val("0");
+        if ($("#InvestmentPropertyAnnualAppreciationRate" + (idx)).val().length <= 0)
+            $("#InvestmentPropertyAnnualAppreciationRate" + (idx)).val("0");
+        if ($("#InvestmentPropertyMortgageRate" + (idx)).val().length <= 0)
+            $("#InvestmentPropertyMortgageRate" + (idx)).val("0");
         togglePropertyWithValue(idx);
         initializeInvestmentProperties();
     }
@@ -479,10 +582,159 @@ function togglePropertyWithValue(idx) {
 }
 
 function togglePropertyToReadyToAdd(idx) {
+
     $("#divCardIP" + idx).show();
     $("#divNewIP" + idx).show();
     $("#btnAddIP" + idx).show();
     $("#btnSaveIP" + idx).hide();
     $("#divUpdateIP" + idx).hide();
     $("#divTableIP" + idx).hide();
+}
+
+// Current Investment Properties
+function initializeCurrentInvestmentProperties() {
+
+    for (i = 1; i <= 6; i++) {
+
+        var noValue = true;
+        var elemPropertyName = $("#CurrentInvestmentPropertyName" + i)
+
+        if (elemPropertyName) {
+            var propertyName = elemPropertyName.val();
+            if (propertyName.length > 0)
+                noValue = false;
+        }
+        if (noValue) {
+            // set this node as ready to add and hide succeeding elements
+            toggleCurrentPropertyToReadyToAdd(i);
+            hideAllSucceedingCurrentProperties(i);
+            return;
+        }
+        else {
+            toggleCurrentPropertyWithValue(i);
+        }
+    }
+}
+
+function toggleCurrentInvestmentProperties(idx) {
+
+    for (i = idx; i <= 20; i++) {
+
+        var noValue = true;
+        var elemPropertyName = $("#CurrentInvestmentPropertyName" + i);
+
+        if (elemPropertyName) {
+            var propertyName = elemPropertyName.val();
+            if (propertyName.length > 0)
+                noValue = false;
+        }
+        if (noValue) {
+            // set this node as ready to add and hide succeeding elements
+            toggleCurrentPropertyToReadyToAdd(i);
+            hideAllSucceedingCurrentProperties(i);
+            return;
+        }
+        else {
+            toggleCurrentPropertyWithValue(i);
+        }
+    }
+}
+
+function transferCurrentValuesToPredecessor(idx) {
+
+    for (i = idx; i <= 19; i++) {
+
+        var nextPropertyName = $("#CurrentInvestmentPropertyName" + (i + 1)).val();
+        if (nextPropertyName.length > 0) {
+            // perform transfer
+            $("#CurrentInvestmentPropertyName" + i).val($("#CurrentInvestmentPropertyName" + (i + 1)).val());
+            $("#CurrentInvestmentPropertyName" + (i + 1)).val("");
+            $("#lblCurrentInvestmentPropertyName" + i).text($("#lblCurrentInvestmentPropertyName" + (i + 1)).text());
+            $("#lblCurrentInvestmentPropertyName" + (i + 1)).text("");
+            $("#CurrentInvestmentPropertyPurchaseYear" + i).val($("#CurrentInvestmentPropertyPurchaseYear" + (i + 1)).val());
+            $("#CurrentInvestmentPropertyPurchaseYear" + (i + 1)).val("");
+            $("#CurrentInvestmentPropertyRepaymentsBeginYear" + i).val($("#CurrentInvestmentPropertyRepaymentsBeginYear" + (i + 1)).val());
+            $("#CurrentInvestmentPropertyRepaymentsBeginYear" + (i + 1)).val("");
+            $("#CurrentInvestmentPropertyValue" + i).val($("#CurrentInvestmentPropertyValue" + (i + 1)).val());
+            $("#CurrentInvestmentPropertyValue" + (i + 1)).val("");
+            $("#CurrentInvestmentPropertyDebt" + i).val($("#CurrentInvestmentPropertyDebt" + (i + 1)).val());
+            $("#CurrentInvestmentPropertyDebt" + (i + 1)).val("");
+            $("#CurrentInvestmentPropertyYearsToRepayDebt" + i).val($("#CurrentInvestmentPropertyYearsToRepayDebt" + (i + 1)).val());
+            $("#CurrentInvestmentPropertyYearsToRepayDebt" + (i + 1)).val("");
+            $("#CurrentInvestmentPropertyAnnualAppreciationRate" + i).val($("#CurrentInvestmentPropertyAnnualAppreciationRate" + (i + 1)).val());
+            $("#CurrentInvestmentPropertyAnnualAppreciationRate" + (i + 1)).val("");
+            $("#CurrentInvestmentPropertyMortgageRate" + i).val($("#CurrentInvestmentPropertyMortgageRate" + (i + 1)).val());
+            $("#CurrentInvestmentPropertyMortgageRate" + (i + 1)).val("");
+            $("#CurrentInvestmentPropertyMonthlyRepayments" + i).text($("#CurrentInvestmentPropertyMonthlyRepayments" + (i + 1)).text());
+            $("#CurrentInvestmentPropertyMonthlyRepayments" + (i + 1)).text("");
+            $("#CurrentInvestmentPropertyNetHomeValueAtRetirement" + i).text($("#CurrentInvestmentPropertyNetHomeValueAtRetirement" + (i + 1)).text());
+            $("#CurrentInvestmentPropertyNetHomeValueAtRetirement" + (i + 1)).text("");
+        }
+        else {
+            return;
+        }
+    }
+}
+
+function addsaveCurrentProperty(idx) {
+    if ($("#CurrentInvestmentProperty" + idx).val().trim().length > 0) {
+        $("#CurrentInvestmentPropertyName" + idx).val($("#CurrentInvestmentProperty" + idx).val().trim());
+        $("#lblCurrentInvestmentPropertyName" + idx).text($("#CurrentInvestmentProperty" + idx).val().trim());
+
+        if ($("#CurrentInvestmentPropertyPurchaseYear" + (idx)).val().length <= 0)
+            $("#CurrentInvestmentPropertyPurchaseYear" + (idx)).val("0");
+        if ($("#CurrentInvestmentPropertyRepaymentsBeginYear" + (idx)).val().length <= 0)
+            $("#CurrentInvestmentPropertyRepaymentsBeginYear" + (idx)).val("0");
+        if ($("#CurrentInvestmentPropertyValue" + (idx)).val().length <= 0)
+            $("#CurrentInvestmentPropertyValue" + (idx)).val("0");
+        if ($("#CurrentInvestmentPropertyDebt" + (idx)).val().length <= 0)
+            $("#CurrentInvestmentPropertyDebt" + (idx)).val("0");
+        if ($("#CurrentInvestmentPropertyYearsToRepayDebt" + (idx)).val().length <= 0)
+            $("#CurrentInvestmentPropertyYearsToRepayDebt" + (idx)).val("0");
+        if ($("#CurrentInvestmentPropertyAnnualAppreciationRate" + (idx)).val().length <= 0)
+            $("#CurrentInvestmentPropertyAnnualAppreciationRate" + (idx)).val("0");
+        if ($("#CurrentInvestmentPropertyMortgageRate" + (idx)).val().length <= 0)
+            $("#CurrentInvestmentPropertyMortgageRate" + (idx)).val("0");
+        toggleCurrentPropertyWithValue(idx);
+        initializeInvestmentCurrentProperties();
+    }
+}
+
+function removeCurrentProperty(idx) {
+    $("#CurrentInvestmentPropertyName" + idx).val("");
+    transferCurrentValuesToPredecessor(idx);
+    initializeInvestmentCurrentProperties();
+}
+
+function editCurrentProperty(idx) {
+    $("#CurrentInvestmentProperty" + idx).val($("#CurrentInvestmentPropertyName" + idx).val());
+    $("#divNewCurrentIP" + idx).show();
+    $("#btnAddCurrentIP" + idx).hide();
+    $("#btnSaveCurrentIP" + idx).show();
+    $("#divUpdateCurrentIP" + idx).hide();
+}
+
+function hideAllSucceedingCurrentProperties(idx) {
+
+    for (i = idx + 1; i <= 20; i++) {
+        $("#divCardCurrentIP" + i).hide();
+    }
+}
+
+function toggleCurrentPropertyWithValue(idx) {
+    $("#divCardCurrentIP" + idx).show();
+    $("#divNewCurrentIP" + idx).hide();
+    $("#divUpdateCurrentIP" + idx).show();
+    $("#btnEditCurrentIP" + idx).show();
+    $("#btnRemoveCurrentIP" + idx).show();
+    $("#divTableCurrentIP" + idx).show();
+}
+
+function toggleCurrentPropertyToReadyToAdd(idx) {
+    $("#divCardCurrentIP" + idx).show();
+    $("#divNewCurrentIP" + idx).show();
+    $("#btnAddCurrentIP" + idx).show();
+    $("#btnSaveCurrentIP" + idx).hide();
+    $("#divUpdateCurrentIP" + idx).hide();
+    $("#divTableCurrentIP" + idx).hide();
 }

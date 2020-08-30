@@ -7,8 +7,11 @@ Namespace WealthTracker.Models
         Public Property InvestmentPropertyPurchaseYear As Double
         Public Property InvestmentPropertyValue As Double
         Public Property InvestmentPropertyDebt As Double
+        Public Property InvestmentPropertyAnnualAppreciationRate As Double
+        Public Property InvestmentPropertyMortgageRate As Double
         Public Property InvestmentPropertyRepaymentsBeginYear As Double
         Public Property InvestmentPropertyYearsToRepayDebt As Double
+        Public Property InvestmentPropertyMonthlyInterestRepayments As Double
         Public Property InvestmentPropertyMonthlyRepayments As Double
         Public Property InvestmentPropertyNetHomeValueAtRetirement As Double
         Public Property InvestmentPropertyList As List(Of PropertyData)

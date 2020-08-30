@@ -5,8 +5,8 @@
         var haveNonNumbers = targetPattern.test(currentInput);
         var fixedInput = currentInput.replace(targetPattern, "");
         var cpos = getCaretPosition(this);
-        if (fixedInput === "")
-            fixedInput = 0;
+        //if (fixedInput === "")
+        //    fixedInput = 0;
         $(this).val(fixedInput);
 
         // move caret to correct position after removing non numbers

@@ -54,9 +54,9 @@ Partial Class _wealthtracker
                     output.InflationRate = 0.02
                     output.NetAssetsReturnOnInvestment = 0.04
                     output.AnnualCashSavingsContributions = 0
-                    output.CashSavingsInterestRate = 0.02
-                    output.KiwiSaverAverageInvestmentRateClient = 0.09
-                    output.KiwiSaverAverageInvestmentRateSpouse = 0.09
+                    output.CashSavingsInterestRate = 0.01
+                    output.KiwiSaverAverageInvestmentRateClient = 0.04
+                    output.KiwiSaverAverageInvestmentRateSpouse = 0.04
                     output.LifeExpectancyAverage = 88
                     output.KiwiSaverEmployeeContributionClient = 0.03
                     output.KiwiSaverEmployeeContributionSpouse = 0.03
@@ -65,7 +65,7 @@ Partial Class _wealthtracker
                     output.ShareBusinessGrowthRate = 0.1
                     output.HomeInterestRate = 0.04
                     output.HomeAnnualAppreciationRate = 0.06
-                    output.HomeYearsToRepayMortgage = 15
+                    output.HomeYearsToRepayMortgage = 25
                     output.ExpectedInheritance = New YearAmountData()
                     output.MaturingInvestment1 = New YearAmountData()
                     output.MaturingInvestment2 = New YearAmountData()
@@ -74,6 +74,7 @@ Partial Class _wealthtracker
                     output.CurrentDebtYearsToRepay = 10
 
                     ' Get property values
+                    ExtractCurrentInvestmentPropertiesValuesFromRequestForm(output)
                     ExtractInvestmentPropertiesValuesFromFields(output)
 
                     ' Compute
@@ -146,9 +147,12 @@ Partial Class _wealthtracker
         Me.CurrentDebtYearsToRepay.Text = output.CurrentDebtYearsToRepay.ToString("#,##0")
         Me.CurrentDebtMothlyRepayment.Text = output.CurrentDebtMothlyRepayment.ToString("#,##0")
 
+        PopulateCurrentInvestmentPropertiesFieldsFromModel(output)
+        PopulateInvestmentPropertiesFieldsFromModel(output)
+
     End Sub
 
-    Protected Sub btnUpdateChart_Click(sender As Object, e As EventArgs) Handles btnUpdateChart.Click, InvestmentPropertySave1.Click, InvestmentPropertySave2.Click, InvestmentPropertySave3.Click, InvestmentPropertySave4.Click, InvestmentPropertySave5.Click, InvestmentPropertySave6.Click, InvestmentPropertySave7.Click, InvestmentPropertySave8.Click, InvestmentPropertySave9.Click, InvestmentPropertySave10.Click, InvestmentPropertySave11.Click, InvestmentPropertySave12.Click, InvestmentPropertySave13.Click, InvestmentPropertySave14.Click, InvestmentPropertySave15.Click, InvestmentPropertySave16.Click, InvestmentPropertySave17.Click, InvestmentPropertySave18.Click, InvestmentPropertySave19.Click, InvestmentPropertySave20.Click
+    Protected Sub btnUpdateChart_Click(sender As Object, e As EventArgs) Handles btnUpdateChart.Click, InvestmentPropertySave1.Click, InvestmentPropertySave2.Click, InvestmentPropertySave3.Click, InvestmentPropertySave4.Click, InvestmentPropertySave5.Click, InvestmentPropertySave6.Click, InvestmentPropertySave7.Click, InvestmentPropertySave8.Click, InvestmentPropertySave9.Click, InvestmentPropertySave10.Click, InvestmentPropertySave11.Click, InvestmentPropertySave12.Click, InvestmentPropertySave13.Click, InvestmentPropertySave14.Click, InvestmentPropertySave15.Click, InvestmentPropertySave16.Click, InvestmentPropertySave17.Click, InvestmentPropertySave18.Click, InvestmentPropertySave19.Click, InvestmentPropertySave20.Click, CurrentInvestmentPropertySave1.Click, CurrentInvestmentPropertySave2.Click, CurrentInvestmentPropertySave3.Click, CurrentInvestmentPropertySave4.Click, CurrentInvestmentPropertySave5.Click, CurrentInvestmentPropertySave6.Click
         ' get model from session
         Dim output As New WealthTrackerOutputModel
         If Not (HttpContext.Current.Session.Item("WEALTHTRACKER_CURRENTOBJECT") Is Nothing) Then
@@ -159,6 +163,7 @@ Partial Class _wealthtracker
         UpdateModelFromUpdatableFields(output)
 
         ' Get property values
+        ExtractCurrentInvestmentPropertiesValuesFromFields(output)
         ExtractInvestmentPropertiesValuesFromFields(output)
 
         ' recompute values
@@ -166,66 +171,68 @@ Partial Class _wealthtracker
 
         ' populate Fields
         PopulateFieldsFromModel(output)
+        PopulateCurrentInvestmentPropertiesFieldsFromModel(output)
         PopulateInvestmentPropertiesFieldsFromModel(output)
+
 
     End Sub
 
     Private Sub UpdateModelFromUpdatableFields(ByRef _output As WealthTrackerOutputModel)
 
-        _output.TotalAnnualIncome = Me.TotalAnnualIncome.Text
-        _output.YearsToRetirement = Me.YearsToRetirement.Text
-        _output.InflationRate = Me.InflationRate.Text
+        _output.TotalAnnualIncome = ExtractNumericValueFromTextBox(Me.TotalAnnualIncome)
+        _output.YearsToRetirement = ExtractNumericValueFromTextBox(Me.YearsToRetirement)
+        _output.InflationRate = ExtractNumericValueFromTextBox(Me.InflationRate)
         _output.InflationRate = _output.InflationRate / 100
-        _output.LessPension = Me.LessPension.Text
-        _output.AnnualCashSavingsContributions = Me.AnnualCashSavingsContributions.Text
-        _output.CashSavingsInterestRate = Me.CashSavingsInterestRate.Text
+        _output.LessPension = ExtractNumericValueFromTextBox(Me.LessPension)
+        _output.AnnualCashSavingsContributions = ExtractNumericValueFromTextBox(Me.AnnualCashSavingsContributions)
+        _output.CashSavingsInterestRate = ExtractNumericValueFromTextBox(Me.CashSavingsInterestRate)
         _output.CashSavingsInterestRate = _output.CashSavingsInterestRate / 100
-        _output.KiwiSaverAmountClient = Me.KiwiSaverAmountClient.Text
-        _output.KiwiSaverEmployeeContributionClient = Me.KiwiSaverEmployeeContributionClient.Text
+        _output.KiwiSaverAmountClient = ExtractNumericValueFromTextBox(Me.KiwiSaverAmountClient)
+        _output.KiwiSaverEmployeeContributionClient = ExtractNumericValueFromTextBox(Me.KiwiSaverEmployeeContributionClient)
         _output.KiwiSaverEmployeeContributionClient = _output.KiwiSaverEmployeeContributionClient / 100
-        _output.KiwiSaverAverageInvestmentRateClient = Me.KiwiSaverAverageInvestmentRateClient.Text
+        _output.KiwiSaverAverageInvestmentRateClient = ExtractNumericValueFromTextBox(Me.KiwiSaverAverageInvestmentRateClient)
         _output.KiwiSaverAverageInvestmentRateClient = _output.KiwiSaverAverageInvestmentRateClient / 100
-        _output.KiwiSaverAmountSpouse = Me.KiwiSaverAmountSpouse.Text
-        _output.KiwiSaverEmployeeContributionSpouse = Me.KiwiSaverEmployeeContributionSpouse.Text
+        _output.KiwiSaverAmountSpouse = ExtractNumericValueFromTextBox(Me.KiwiSaverAmountSpouse)
+        _output.KiwiSaverEmployeeContributionSpouse = ExtractNumericValueFromTextBox(Me.KiwiSaverEmployeeContributionSpouse)
         _output.KiwiSaverEmployeeContributionSpouse = _output.KiwiSaverEmployeeContributionSpouse / 100
-        _output.KiwiSaverAverageInvestmentRateSpouse = Me.KiwiSaverAverageInvestmentRateSpouse.Text
+        _output.KiwiSaverAverageInvestmentRateSpouse = ExtractNumericValueFromTextBox(Me.KiwiSaverAverageInvestmentRateSpouse)
         _output.KiwiSaverAverageInvestmentRateSpouse = _output.KiwiSaverAverageInvestmentRateSpouse / 100
-        _output.ShareBusinessGrowthRate = Me.ShareBusinessGrowthRate.Text
+        _output.ShareBusinessGrowthRate = ExtractNumericValueFromTextBox(Me.ShareBusinessGrowthRate)
         _output.ShareBusinessGrowthRate = _output.ShareBusinessGrowthRate / 100
-        _output.HomeInterestRate = Me.HomeInterestRate.Text
+        _output.HomeInterestRate = ExtractNumericValueFromTextBox(Me.HomeInterestRate)
         _output.HomeInterestRate = _output.HomeInterestRate / 100
-        _output.HomeAnnualAppreciationRate = Me.HomeAnnualAppreciationRate.Text
+        _output.HomeAnnualAppreciationRate = ExtractNumericValueFromTextBox(Me.HomeAnnualAppreciationRate)
         _output.HomeAnnualAppreciationRate = _output.HomeAnnualAppreciationRate / 100
-        _output.HomeYearsToRepayMortgage = Me.HomeYearsToRepayMortgage.Text
-        _output.NetAssetsReturnOnInvestment = Me.NetAssetsReturnOnInvestment.Text
+        _output.HomeYearsToRepayMortgage = ExtractNumericValueFromTextBox(Me.HomeYearsToRepayMortgage)
+        _output.NetAssetsReturnOnInvestment = ExtractNumericValueFromTextBox(Me.NetAssetsReturnOnInvestment)
         _output.NetAssetsReturnOnInvestment = _output.NetAssetsReturnOnInvestment / 100
 
         Dim eiYearAmountData As New YearAmountData
-        eiYearAmountData.TargetYear = Me.ExpectedInheritanceYear.Text
-        eiYearAmountData.Amount = Me.ExpectedInheritanceAmount.Text
+        eiYearAmountData.TargetYear = ExtractNumericValueFromTextBox(Me.ExpectedInheritanceYear)
+        eiYearAmountData.Amount = ExtractNumericValueFromTextBox(Me.ExpectedInheritanceAmount)
         _output.ExpectedInheritance = eiYearAmountData
 
         Dim mi1YearAmountData As New YearAmountData
-        mi1YearAmountData.TargetYear = Me.MaturingInvestment1Year.Text
-        mi1YearAmountData.Amount = Me.MaturingInvestment1Amount.Text
+        mi1YearAmountData.TargetYear = ExtractNumericValueFromTextBox(Me.MaturingInvestment1Year)
+        mi1YearAmountData.Amount = ExtractNumericValueFromTextBox(Me.MaturingInvestment1Amount)
         _output.MaturingInvestment1 = mi1YearAmountData
 
         Dim mi2YearAmountData As New YearAmountData
-        mi2YearAmountData.TargetYear = Me.MaturingInvestment2Year.Text
-        mi2YearAmountData.Amount = Me.MaturingInvestment2Amount.Text
+        mi2YearAmountData.TargetYear = ExtractNumericValueFromTextBox(Me.MaturingInvestment2Year)
+        mi2YearAmountData.Amount = ExtractNumericValueFromTextBox(Me.MaturingInvestment2Amount)
         _output.MaturingInvestment2 = mi2YearAmountData
 
         Dim mi3YearAmountData As New YearAmountData
-        mi3YearAmountData.TargetYear = Me.MaturingInvestment3Year.Text
-        mi3YearAmountData.Amount = Me.MaturingInvestment3Amount.Text
+        mi3YearAmountData.TargetYear = ExtractNumericValueFromTextBox(Me.MaturingInvestment3Year)
+        mi3YearAmountData.Amount = ExtractNumericValueFromTextBox(Me.MaturingInvestment3Amount)
         _output.MaturingInvestment3 = mi3YearAmountData
 
         Dim mi4YearAmountData As New YearAmountData
-        mi4YearAmountData.TargetYear = Me.MaturingInvestment4Year.Text
-        mi4YearAmountData.Amount = Me.MaturingInvestment4Amount.Text
+        mi4YearAmountData.TargetYear = ExtractNumericValueFromTextBox(Me.MaturingInvestment4Year)
+        mi4YearAmountData.Amount = ExtractNumericValueFromTextBox(Me.MaturingInvestment4Amount)
         _output.MaturingInvestment4 = mi4YearAmountData
 
-        _output.CurrentDebtYearsToRepay = Me.CurrentDebtYearsToRepay.Text
+        _output.CurrentDebtYearsToRepay = ExtractNumericValueFromTextBox(Me.CurrentDebtYearsToRepay)
 
     End Sub
 
@@ -239,6 +246,7 @@ Partial Class _wealthtracker
         wtCustomLogic.FillKiwiData(_output, retirementAge, _isFromBasicDetails)
         wtCustomLogic.FillSharesBusiness(_output)
         wtCustomLogic.FillHomeData(_output)
+        wtCustomLogic.FillCurrentInvestmentProperty(_output)
         wtCustomLogic.FillInheritanceInvestment(_output)
         wtCustomLogic.FillCurrentDebt(_output)
         wtCustomLogic.FillCurrentAssetsData(_output)
@@ -264,6 +272,47 @@ Partial Class _wealthtracker
         Return retval
     End Function
 
+    Private Function ExtractNumericValueFromTextBox(ByVal _txt As TextBox) As Double
+        Dim retval As Double = 0
+        If (Not (_txt Is Nothing)) Then
+            If (String.IsNullOrEmpty(_txt.Text.Trim()) = False) Then
+                Dim formValue As String = _txt.Text
+                formValue = formValue.Replace(",", "")
+                retval = Double.Parse(formValue)
+            End If
+        End If
+        Return retval
+    End Function
+
+    Private Sub ExtractCurrentInvestmentPropertiesValuesFromFields(ByRef _output As WealthTrackerOutputModel)
+
+        Dim dataList As New List(Of InvestmentPropertyData)
+
+        For i As Integer = 1 To 6
+
+            Dim propertyName As HiddenField = formMain.FindControl("CurrentInvestmentPropertyName" & i)
+            If (Not (propertyName Is Nothing)) Then
+                If (String.IsNullOrEmpty(propertyName.Value) = False) Then
+
+                    Dim mdata As New InvestmentPropertyData()
+                    mdata.InvestmentPropertyIndex = dataList.Count + 1
+                    mdata.InvestmentPropertyName = propertyName.Value
+                    mdata.InvestmentPropertyPurchaseYear = ExtractNumericValueFromTextBox(CType(formMain.FindControl("CurrentInvestmentPropertyPurchaseYear" & i), TextBox))
+                    mdata.InvestmentPropertyValue = ExtractNumericValueFromTextBox(CType(formMain.FindControl("CurrentInvestmentPropertyValue" & i), TextBox))
+                    mdata.InvestmentPropertyDebt = ExtractNumericValueFromTextBox(CType(formMain.FindControl("CurrentInvestmentPropertyDebt" & i), TextBox))
+                    mdata.InvestmentPropertyRepaymentsBeginYear = ExtractNumericValueFromTextBox(CType(formMain.FindControl("CurrentInvestmentPropertyRepaymentsBeginYear" & i), TextBox))
+                    mdata.InvestmentPropertyYearsToRepayDebt = ExtractNumericValueFromTextBox(CType(formMain.FindControl("CurrentInvestmentPropertyYearsToRepayDebt" & i), TextBox))
+                    mdata.InvestmentPropertyAnnualAppreciationRate = ExtractNumericValueFromTextBox(CType(formMain.FindControl("CurrentInvestmentPropertyAnnualAppreciationRate" & i), TextBox)) / 100
+                    mdata.InvestmentPropertyMortgageRate = ExtractNumericValueFromTextBox(CType(formMain.FindControl("CurrentInvestmentPropertyMortgageRate" & i), TextBox)) / 100
+
+                    dataList.Add(mdata)
+                End If
+            End If
+        Next
+
+        _output.CurrentInvestmentPropertyList = dataList
+    End Sub
+
     Private Sub ExtractInvestmentPropertiesValuesFromFields(ByRef _output As WealthTrackerOutputModel)
 
         Dim dataList As New List(Of InvestmentPropertyData)
@@ -273,20 +322,46 @@ Partial Class _wealthtracker
             Dim propertyName As HiddenField = formMain.FindControl("InvestmentPropertyName" & i)
             If (Not (propertyName Is Nothing)) Then
                 If (String.IsNullOrEmpty(propertyName.Value) = False) Then
+
                     Dim mdata As New InvestmentPropertyData()
                     mdata.InvestmentPropertyIndex = dataList.Count + 1
                     mdata.InvestmentPropertyName = propertyName.Value
-                    mdata.InvestmentPropertyPurchaseYear = CType(formMain.FindControl("InvestmentPropertyPurchaseYear" & i), TextBox).Text
-                    mdata.InvestmentPropertyValue = CType(formMain.FindControl("InvestmentPropertyValue" & i), TextBox).Text
-                    mdata.InvestmentPropertyDebt = CType(formMain.FindControl("InvestmentPropertyDebt" & i), TextBox).Text
-                    mdata.InvestmentPropertyRepaymentsBeginYear = CType(formMain.FindControl("InvestmentPropertyRepaymentsBeginYear" & i), TextBox).Text
-                    mdata.InvestmentPropertyYearsToRepayDebt = CType(formMain.FindControl("InvestmentPropertyYearsToRepayDebt" & i), TextBox).Text
+                    mdata.InvestmentPropertyPurchaseYear = ExtractNumericValueFromTextBox(CType(formMain.FindControl("InvestmentPropertyPurchaseYear" & i), TextBox))
+                    mdata.InvestmentPropertyValue = ExtractNumericValueFromTextBox(CType(formMain.FindControl("InvestmentPropertyValue" & i), TextBox))
+                    mdata.InvestmentPropertyDebt = ExtractNumericValueFromTextBox(CType(formMain.FindControl("InvestmentPropertyDebt" & i), TextBox))
+                    mdata.InvestmentPropertyRepaymentsBeginYear = ExtractNumericValueFromTextBox(CType(formMain.FindControl("InvestmentPropertyRepaymentsBeginYear" & i), TextBox))
+                    mdata.InvestmentPropertyYearsToRepayDebt = ExtractNumericValueFromTextBox(CType(formMain.FindControl("InvestmentPropertyYearsToRepayDebt" & i), TextBox))
+                    mdata.InvestmentPropertyAnnualAppreciationRate = ExtractNumericValueFromTextBox(CType(formMain.FindControl("InvestmentPropertyAnnualAppreciationRate" & i), TextBox)) / 100
+                    mdata.InvestmentPropertyMortgageRate = ExtractNumericValueFromTextBox(CType(formMain.FindControl("InvestmentPropertyMortgageRate" & i), TextBox)) / 100
+
                     dataList.Add(mdata)
                 End If
             End If
         Next
 
         _output.InvestmentPropertyList = dataList
+    End Sub
+
+    Public Sub PopulateCurrentInvestmentPropertiesFieldsFromModel(ByRef _output As WealthTrackerOutputModel)
+
+        Dim dataList As List(Of InvestmentPropertyData) = _output.CurrentInvestmentPropertyList
+        For i As Integer = 0 To dataList.Count - 1
+
+            Dim mdata As InvestmentPropertyData = dataList.Item(i)
+            CType(formMain.FindControl("CurrentInvestmentPropertyName" & (i + 1)), HiddenField).Value = mdata.InvestmentPropertyName
+            CType(formMain.FindControl("lblCurrentInvestmentPropertyName" & (i + 1)), Label).Text = mdata.InvestmentPropertyName
+            CType(formMain.FindControl("CurrentInvestmentPropertyPurchaseYear" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyPurchaseYear.ToString("#,##0")
+            CType(formMain.FindControl("CurrentInvestmentPropertyValue" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyValue.ToString("#,##0")
+            CType(formMain.FindControl("CurrentInvestmentPropertyDebt" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyDebt.ToString("#,##0")
+            CType(formMain.FindControl("CurrentInvestmentPropertyRepaymentsBeginYear" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyRepaymentsBeginYear.ToString("#,##0")
+            CType(formMain.FindControl("CurrentInvestmentPropertyYearsToRepayDebt" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyYearsToRepayDebt.ToString("#,##0")
+            CType(formMain.FindControl("CurrentInvestmentPropertyAnnualAppreciationRate" & (i + 1)), TextBox).Text = (mdata.InvestmentPropertyAnnualAppreciationRate * 100).ToString("#,##0")
+            CType(formMain.FindControl("CurrentInvestmentPropertyMortgageRate" & (i + 1)), TextBox).Text = (mdata.InvestmentPropertyMortgageRate * 100).ToString("#,##0")
+            CType(formMain.FindControl("CurrentInvestmentPropertyMonthlyInterestRepayments" & (i + 1)), Label).Text = (mdata.InvestmentPropertyMonthlyInterestRepayments).ToString("#,##0")
+            CType(formMain.FindControl("CurrentInvestmentPropertyMonthlyRepayments" & (i + 1)), Label).Text = mdata.InvestmentPropertyMonthlyRepayments.ToString("#,##0")
+            CType(formMain.FindControl("CurrentInvestmentPropertyNetHomeValueAtRetirement" & (i + 1)), Label).Text = mdata.InvestmentPropertyNetHomeValueAtRetirement.ToString("#,##0")
+        Next
+
     End Sub
 
     Public Sub PopulateInvestmentPropertiesFieldsFromModel(ByRef _output As WealthTrackerOutputModel)
@@ -302,10 +377,41 @@ Partial Class _wealthtracker
             CType(formMain.FindControl("InvestmentPropertyDebt" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyDebt.ToString("#,##0")
             CType(formMain.FindControl("InvestmentPropertyRepaymentsBeginYear" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyRepaymentsBeginYear.ToString("#,##0")
             CType(formMain.FindControl("InvestmentPropertyYearsToRepayDebt" & (i + 1)), TextBox).Text = mdata.InvestmentPropertyYearsToRepayDebt.ToString("#,##0")
+            CType(formMain.FindControl("InvestmentPropertyAnnualAppreciationRate" & (i + 1)), TextBox).Text = (mdata.InvestmentPropertyRepaymentsBeginYear * 100).ToString("#,##0")
+            CType(formMain.FindControl("InvestmentPropertyMortgageRate" & (i + 1)), TextBox).Text = (mdata.InvestmentPropertyYearsToRepayDebt * 100).ToString("#,##0")
+            CType(formMain.FindControl("InvestmentPropertyMonthlyInterestRepayments" & (i + 1)), Label).Text = mdata.InvestmentPropertyMonthlyInterestRepayments.ToString("#,##0")
             CType(formMain.FindControl("InvestmentPropertyMonthlyRepayments" & (i + 1)), Label).Text = mdata.InvestmentPropertyMonthlyRepayments.ToString("#,##0")
             CType(formMain.FindControl("InvestmentPropertyNetHomeValueAtRetirement" & (i + 1)), Label).Text = mdata.InvestmentPropertyNetHomeValueAtRetirement.ToString("#,##0")
         Next
 
     End Sub
 
+    Private Sub ExtractCurrentInvestmentPropertiesValuesFromRequestForm(ByRef _output As WealthTrackerOutputModel)
+
+        Dim dataList As New List(Of InvestmentPropertyData)
+
+        For i As Integer = 1 To 6
+
+            Dim propertyName As HiddenField = formMain.FindControl("CurrentInvestmentPropertyName" & i)
+            If (Not (propertyName Is Nothing)) Then
+                If (String.IsNullOrEmpty(propertyName.Value) = False) Then
+
+                    Dim mdata As New InvestmentPropertyData()
+                    mdata.InvestmentPropertyIndex = dataList.Count + 1
+                    mdata.InvestmentPropertyName = propertyName.Value
+                    mdata.InvestmentPropertyPurchaseYear = ExtractNumericValueFromRequestForm("CurrentInvestmentPropertyPurchaseYear" & i)
+                    mdata.InvestmentPropertyValue = ExtractNumericValueFromRequestForm("CurrentInvestmentPropertyValue" & i)
+                    mdata.InvestmentPropertyDebt = ExtractNumericValueFromRequestForm("CurrentInvestmentPropertyDebt" & i)
+                    mdata.InvestmentPropertyRepaymentsBeginYear = 0
+                    mdata.InvestmentPropertyYearsToRepayDebt = _output.HomeYearsToRepayMortgage
+                    mdata.InvestmentPropertyAnnualAppreciationRate = _output.HomeAnnualAppreciationRate
+                    mdata.InvestmentPropertyMortgageRate = _output.HomeInterestRate
+
+                    dataList.Add(mdata)
+                End If
+            End If
+        Next
+
+        _output.CurrentInvestmentPropertyList = dataList
+    End Sub
 End Class

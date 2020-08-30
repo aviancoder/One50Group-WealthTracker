@@ -209,6 +209,565 @@
                         </div>
                     </div>
                 </div>
+                <!-- Start CurrentInvestmentProperty -->
+                <div class="row">
+                    <div class="col-md-12 mb-4 pr-md-1">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title text-info">Current Investment Properties</h4>
+                                <div class="row" id="divCurrentInvestmentProperty">
+                                    <div class="col-md-6 mb-4" id="divCardCurrentIP1" style="display: none;">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div id="divNewCurrentIP1" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <label for="CurrentInvestmentProperty1">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty1" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="addsaveCurrentProperty(1)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP1" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
+                                                            <button onclick="addsaveCurrentProperty(1)" type="button" class="btn btn-sm p-1" id="btnSaveCurrentIP1" style="display: none;"><span class="fa fa-check-circle" style="color: #1b6ec2; font-size: 2rem;" title="save property name"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divUpdateCurrentIP1" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <asp:HiddenField ID="CurrentInvestmentPropertyName1" runat="server" />
+                                                            <asp:Label ID="lblCurrentInvestmentPropertyName1" runat="server" class="border-0 h5 text-info text-left"></asp:Label>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="editCurrentProperty(1)" type="button" class="btn btn-sm p-1" id="btnEditCurrentIP1" style="display: none;"><span class="fa fa-pencil" style="color: #28a745; font-size: 2rem;" title="edit property name"></span></button>
+                                                            <button onclick="removeCurrentProperty(1)" type="button" class="btn btn-sm p-1" id="btnRemoveCurrentIP1" style="display: none;"><span class="fa fa-trash" style="color: #dc3545; font-size: 2rem;" title="remove property"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divTableCurrentIP1" style="display: none;">
+                                                    <table class="table table-borderless">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><span>Purchase Year</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyPurchaseYear1" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Value ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyValue1" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Debt ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt1" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>P&I Repayments Begin Year ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyRepaymentsBeginYear1" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Years To Repay Debt</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyYearsToRepayDebt1" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyAnnualAppreciationRate1" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyMortgageRate1" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyInterestRepayments1" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyRepayments1" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="text-success">Net Home Value at Retirement ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyNetHomeValueAtRetirement1" class="text-right h4"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td class="text-right">
+                                                                    <asp:Button runat="server" ID="CurrentInvestmentPropertySave1" class="form-control ui-button-text btn-success" Text="Save"></asp:Button></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4" id="divCardCurrentIP2" style="display: none;">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div id="divNewCurrentIP2" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <label for="CurrentInvestmentProperty2">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty2" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="addsaveCurrentProperty(2)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP2" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
+                                                            <button onclick="addsaveCurrentProperty(2)" type="button" class="btn btn-sm p-1" id="btnSaveCurrentIP2" style="display: none;"><span class="fa fa-check-circle" style="color: #1b6ec2; font-size: 2rem;" title="save property name"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divUpdateCurrentIP2" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <asp:HiddenField ID="CurrentInvestmentPropertyName2" runat="server" />
+                                                            <asp:Label ID="lblCurrentInvestmentPropertyName2" runat="server" class="border-0 h5 text-info text-left"></asp:Label>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="editCurrentProperty(2)" type="button" class="btn btn-sm p-1" id="btnEditCurrentIP2" style="display: none;"><span class="fa fa-pencil" style="color: #28a745; font-size: 2rem;" title="edit property name"></span></button>
+                                                            <button onclick="removeCurrentProperty(2)" type="button" class="btn btn-sm p-1" id="btnRemoveCurrentIP2" style="display: none;"><span class="fa fa-trash" style="color: #dc3545; font-size: 2rem;" title="remove property"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divTableCurrentIP2" style="display: none;">
+                                                    <table class="table table-borderless">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><span>Purchase Year</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyPurchaseYear2" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Value ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyValue2" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Debt ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt2" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>P&I Repayments Begin Year ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyRepaymentsBeginYear2" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Years To Repay Debt</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyYearsToRepayDebt2" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyAnnualAppreciationRate2" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyMortgageRate2" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyInterestRepayments2" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyRepayments2" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="text-success">Net Home Value at Retirement ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyNetHomeValueAtRetirement2" class="text-right h4"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td class="text-right">
+                                                                    <asp:Button runat="server" ID="CurrentInvestmentPropertySave2" class="form-control ui-button-text btn-success" Text="Save"></asp:Button></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4" id="divCardCurrentIP3" style="display: none;">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div id="divNewCurrentIP3" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <label for="CurrentInvestmentProperty3">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty3" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="addsaveCurrentProperty(3)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP3" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
+                                                            <button onclick="addsaveCurrentProperty(3)" type="button" class="btn btn-sm p-1" id="btnSaveCurrentIP3" style="display: none;"><span class="fa fa-check-circle" style="color: #1b6ec2; font-size: 2rem;" title="save property name"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divUpdateCurrentIP3" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <asp:HiddenField ID="CurrentInvestmentPropertyName3" runat="server" />
+                                                            <asp:Label ID="lblCurrentInvestmentPropertyName3" runat="server" class="border-0 h5 text-info text-left"></asp:Label>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="editCurrentProperty(3)" type="button" class="btn btn-sm p-1" id="btnEditCurrentIP3" style="display: none;"><span class="fa fa-pencil" style="color: #28a745; font-size: 2rem;" title="edit property name"></span></button>
+                                                            <button onclick="removeCurrentProperty(3)" type="button" class="btn btn-sm p-1" id="btnRemoveCurrentIP3" style="display: none;"><span class="fa fa-trash" style="color: #dc3545; font-size: 2rem;" title="remove property"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divTableCurrentIP3" style="display: none;">
+                                                    <table class="table table-borderless">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><span>Purchase Year</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyPurchaseYear3" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Value ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyValue3" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Debt ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt3" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>P&I Repayments Begin Year ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyRepaymentsBeginYear3" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Years To Repay Debt</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyYearsToRepayDebt3" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyAnnualAppreciationRate3" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyMortgageRate3" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyInterestRepayments3" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyRepayments3" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="text-success">Net Home Value at Retirement ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyNetHomeValueAtRetirement3" class="text-right h4"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td class="text-right">
+                                                                    <asp:Button runat="server" ID="CurrentInvestmentPropertySave3" class="form-control ui-button-text btn-success" Text="Save"></asp:Button></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4" id="divCardCurrentIP4" style="display: none;">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div id="divNewCurrentIP4" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <label for="CurrentInvestmentProperty4">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty4" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="addsaveCurrentProperty(4)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP4" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
+                                                            <button onclick="addsaveCurrentProperty(4)" type="button" class="btn btn-sm p-1" id="btnSaveCurrentIP4" style="display: none;"><span class="fa fa-check-circle" style="color: #1b6ec2; font-size: 2rem;" title="save property name"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divUpdateCurrentIP4" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <asp:HiddenField ID="CurrentInvestmentPropertyName4" runat="server" />
+                                                            <asp:Label ID="lblCurrentInvestmentPropertyName4" runat="server" class="border-0 h5 text-info text-left"></asp:Label>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="editCurrentProperty(4)" type="button" class="btn btn-sm p-1" id="btnEditCurrentIP4" style="display: none;"><span class="fa fa-pencil" style="color: #28a745; font-size: 2rem;" title="edit property name"></span></button>
+                                                            <button onclick="removeCurrentProperty(4)" type="button" class="btn btn-sm p-1" id="btnRemoveCurrentIP4" style="display: none;"><span class="fa fa-trash" style="color: #dc3545; font-size: 2rem;" title="remove property"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divTableCurrentIP4" style="display: none;">
+                                                    <table class="table table-borderless">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><span>Purchase Year</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyPurchaseYear4" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Value ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyValue4" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Debt ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt4" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>P&I Repayments Begin Year ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyRepaymentsBeginYear4" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Years To Repay Debt</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyYearsToRepayDebt4" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyAnnualAppreciationRate4" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyMortgageRate4" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyInterestRepayments4" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyRepayments4" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="text-success">Net Home Value at Retirement ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyNetHomeValueAtRetirement4" class="text-right h4"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td class="text-right">
+                                                                    <asp:Button runat="server" ID="CurrentInvestmentPropertySave4" class="form-control ui-button-text btn-success" Text="Save"></asp:Button></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4" id="divCardCurrentIP5" style="display: none;">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div id="divNewCurrentIP5" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <label for="CurrentInvestmentProperty5">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty5" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="addsaveCurrentProperty(5)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP5" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
+                                                            <button onclick="addsaveCurrentProperty(5)" type="button" class="btn btn-sm p-1" id="btnSaveCurrentIP5" style="display: none;"><span class="fa fa-check-circle" style="color: #1b6ec2; font-size: 2rem;" title="save property name"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divUpdateCurrentIP5" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <asp:HiddenField ID="CurrentInvestmentPropertyName5" runat="server" />
+                                                            <asp:Label ID="lblCurrentInvestmentPropertyName5" runat="server" class="border-0 h5 text-info text-left"></asp:Label>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="editCurrentProperty(5)" type="button" class="btn btn-sm p-1" id="btnEditCurrentIP5" style="display: none;"><span class="fa fa-pencil" style="color: #28a745; font-size: 2rem;" title="edit property name"></span></button>
+                                                            <button onclick="removeCurrentProperty(5)" type="button" class="btn btn-sm p-1" id="btnRemoveCurrentIP5" style="display: none;"><span class="fa fa-trash" style="color: #dc3545; font-size: 2rem;" title="remove property"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divTableCurrentIP5" style="display: none;">
+                                                    <table class="table table-borderless">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><span>Purchase Year</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyPurchaseYear5" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Value ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyValue5" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Debt ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt5" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>P&I Repayments Begin Year ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyRepaymentsBeginYear5" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Years To Repay Debt</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyYearsToRepayDebt5" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyAnnualAppreciationRate5" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyMortgageRate5" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyInterestRepayments5" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyRepayments5" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="text-success">Net Home Value at Retirement ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyNetHomeValueAtRetirement5" class="text-right h4"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td class="text-right">
+                                                                    <asp:Button runat="server" ID="CurrentInvestmentPropertySave5" class="form-control ui-button-text btn-success" Text="Save"></asp:Button></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4" id="divCardCurrentIP6" style="display: none;">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div id="divNewCurrentIP6" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <label for="CurrentInvestmentProperty6">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty6" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="addsaveCurrentProperty(6)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP6" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
+                                                            <button onclick="addsaveCurrentProperty(6)" type="button" class="btn btn-sm p-1" id="btnSaveCurrentIP6" style="display: none;"><span class="fa fa-check-circle" style="color: #1b6ec2; font-size: 2rem;" title="save property name"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divUpdateCurrentIP6" style="display: none;">
+                                                    <div class="d-flex">
+                                                        <div class="mr-auto p-2">
+                                                            <asp:HiddenField ID="CurrentInvestmentPropertyName6" runat="server" />
+                                                            <asp:Label ID="lblCurrentInvestmentPropertyName6" runat="server" class="border-0 h5 text-info text-left"></asp:Label>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <button onclick="editCurrentProperty(6)" type="button" class="btn btn-sm p-1" id="btnEditCurrentIP6" style="display: none;"><span class="fa fa-pencil" style="color: #28a745; font-size: 2rem;" title="edit property name"></span></button>
+                                                            <button onclick="removeCurrentProperty(6)" type="button" class="btn btn-sm p-1" id="btnRemoveCurrentIP6" style="display: none;"><span class="fa fa-trash" style="color: #dc3545; font-size: 2rem;" title="remove property"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divTableCurrentIP6" style="display: none;">
+                                                    <table class="table table-borderless">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><span>Purchase Year</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyPurchaseYear6" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Value ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyValue6" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Debt ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyDebt6" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>P&I Repayments Begin Year ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyRepaymentsBeginYear6" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Years To Repay Debt</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox ID="CurrentInvestmentPropertyYearsToRepayDebt6" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyAnnualAppreciationRate6" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="CurrentInvestmentPropertyMortgageRate6" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyInterestRepayments6" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyMonthlyRepayments6" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="text-success">Net Home Value at Retirement ($)</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="CurrentInvestmentPropertyNetHomeValueAtRetirement6" class="text-right h4"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td class="text-right">
+                                                                    <asp:Button runat="server" ID="CurrentInvestmentPropertySave6" class="form-control ui-button-text btn-success" Text="Save"></asp:Button></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End CurrentInvestmentProperty -->
                 <div class="row">
                     <div class="col-md-6 mb-4 pr-md-1">
                         <div class="card">
@@ -363,7 +922,7 @@
                     <div class="col-md-12 mb-4 pr-md-1">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title text-info">Investment Properties</h4>
+                                <h4 class="card-title text-info">Proposed Investment Properties</h4>
                                 <div class="row" id="divInvestmentProperty">
                                     <div class="col-md-6 mb-4" id="divCardIP1" style="display: none;">
                                         <div class="card">
@@ -371,7 +930,7 @@
                                                 <div id="divNewIP1" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty1">Property Name</label><asp:TextBox ID="InvestmentProperty1" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty1">Property Name</label><asp:TextBox ID="InvestmentProperty1" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(1)" type="button" class="btn btn-sm p-1" id="btnAddIP1" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -420,7 +979,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt1" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate1" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate1" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments1" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments1" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -447,7 +1021,7 @@
                                                 <div id="divNewIP2" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty2">Property Name</label><asp:TextBox ID="InvestmentProperty2" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty2">Property Name</label><asp:TextBox ID="InvestmentProperty2" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(2)" type="button" class="btn btn-sm p-1" id="btnAddIP2" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -496,7 +1070,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt2" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate2" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate2" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments2" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments2" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -523,7 +1112,7 @@
                                                 <div id="divNewIP3" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty3">Property Name</label><asp:TextBox ID="InvestmentProperty3" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty3">Property Name</label><asp:TextBox ID="InvestmentProperty3" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(3)" type="button" class="btn btn-sm p-1" id="btnAddIP3" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -572,7 +1161,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt3" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate3" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate3" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments3" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments3" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -599,7 +1203,7 @@
                                                 <div id="divNewIP4" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty4">Property Name</label><asp:TextBox ID="InvestmentProperty4" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty4">Property Name</label><asp:TextBox ID="InvestmentProperty4" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(4)" type="button" class="btn btn-sm p-1" id="btnAddIP4" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -648,7 +1252,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt4" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate4" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate4" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments4" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments4" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -675,7 +1294,7 @@
                                                 <div id="divNewIP5" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty5">Property Name</label><asp:TextBox ID="InvestmentProperty5" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty5">Property Name</label><asp:TextBox ID="InvestmentProperty5" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(5)" type="button" class="btn btn-sm p-1" id="btnAddIP5" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -724,7 +1343,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt5" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate5" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate5" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments5" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments5" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -751,7 +1385,7 @@
                                                 <div id="divNewIP6" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty6">Property Name</label><asp:TextBox ID="InvestmentProperty6" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty6">Property Name</label><asp:TextBox ID="InvestmentProperty6" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(6)" type="button" class="btn btn-sm p-1" id="btnAddIP6" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -800,7 +1434,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt6" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate6" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate6" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments6" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments6" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -827,7 +1476,7 @@
                                                 <div id="divNewIP7" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty7">Property Name</label><asp:TextBox ID="InvestmentProperty7" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty7">Property Name</label><asp:TextBox ID="InvestmentProperty7" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(7)" type="button" class="btn btn-sm p-1" id="btnAddIP7" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -876,7 +1525,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt7" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate7" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate7" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments7" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments7" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -903,7 +1567,7 @@
                                                 <div id="divNewIP8" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty8">Property Name</label><asp:TextBox ID="InvestmentProperty8" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty8">Property Name</label><asp:TextBox ID="InvestmentProperty8" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(8)" type="button" class="btn btn-sm p-1" id="btnAddIP8" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -952,7 +1616,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt8" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate8" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate8" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments8" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments8" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -979,7 +1658,7 @@
                                                 <div id="divNewIP9" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty9">Property Name</label><asp:TextBox ID="InvestmentProperty9" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty9">Property Name</label><asp:TextBox ID="InvestmentProperty9" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(9)" type="button" class="btn btn-sm p-1" id="btnAddIP9" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1028,7 +1707,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt9" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate9" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate9" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments9" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments9" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -1055,7 +1749,7 @@
                                                 <div id="divNewIP10" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty10">Property Name</label><asp:TextBox ID="InvestmentProperty10" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty10">Property Name</label><asp:TextBox ID="InvestmentProperty10" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(10)" type="button" class="btn btn-sm p-1" id="btnAddIP10" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1104,7 +1798,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt10" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate10" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate10" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments10" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments10" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -1131,7 +1840,7 @@
                                                 <div id="divNewIP11" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty11">Property Name</label><asp:TextBox ID="InvestmentProperty11" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty11">Property Name</label><asp:TextBox ID="InvestmentProperty11" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(11)" type="button" class="btn btn-sm p-1" id="btnAddIP11" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1180,7 +1889,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt11" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate11" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate11" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments11" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments11" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -1207,7 +1931,7 @@
                                                 <div id="divNewIP12" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty12">Property Name</label><asp:TextBox ID="InvestmentProperty12" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty12">Property Name</label><asp:TextBox ID="InvestmentProperty12" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(12)" type="button" class="btn btn-sm p-1" id="btnAddIP12" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1256,7 +1980,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt12" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate12" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate12" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments12" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments12" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -1283,7 +2022,7 @@
                                                 <div id="divNewIP13" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty13">Property Name</label><asp:TextBox ID="InvestmentProperty13" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty13">Property Name</label><asp:TextBox ID="InvestmentProperty13" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(13)" type="button" class="btn btn-sm p-1" id="btnAddIP13" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1332,7 +2071,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt13" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate13" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate13" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments13" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments13" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -1359,7 +2113,7 @@
                                                 <div id="divNewIP14" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty14">Property Name</label><asp:TextBox ID="InvestmentProperty14" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty14">Property Name</label><asp:TextBox ID="InvestmentProperty14" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(14)" type="button" class="btn btn-sm p-1" id="btnAddIP14" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1408,7 +2162,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt14" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate14" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate14" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments14" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments14" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -1435,7 +2204,7 @@
                                                 <div id="divNewIP15" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty15">Property Name</label><asp:TextBox ID="InvestmentProperty15" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty15">Property Name</label><asp:TextBox ID="InvestmentProperty15" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(15)" type="button" class="btn btn-sm p-1" id="btnAddIP15" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1484,7 +2253,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt15" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate15" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate15" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments15" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments15" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -1511,7 +2295,7 @@
                                                 <div id="divNewIP16" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty16">Property Name</label><asp:TextBox ID="InvestmentProperty16" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty16">Property Name</label><asp:TextBox ID="InvestmentProperty16" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(16)" type="button" class="btn btn-sm p-1" id="btnAddIP16" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1560,7 +2344,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt16" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate16" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate16" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments16" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments16" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -1587,7 +2386,7 @@
                                                 <div id="divNewIP17" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty17">Property Name</label><asp:TextBox ID="InvestmentProperty17" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty17">Property Name</label><asp:TextBox ID="InvestmentProperty17" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(17)" type="button" class="btn btn-sm p-1" id="btnAddIP17" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1636,7 +2435,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt17" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate17" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate17" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments17" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments17" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -1663,7 +2477,7 @@
                                                 <div id="divNewIP18" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty18">Property Name</label><asp:TextBox ID="InvestmentProperty18" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty18">Property Name</label><asp:TextBox ID="InvestmentProperty18" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(18)" type="button" class="btn btn-sm p-1" id="btnAddIP18" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1712,7 +2526,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt18" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate18" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate18" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments18" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments18" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -1739,7 +2568,7 @@
                                                 <div id="divNewIP19" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty19">Property Name</label><asp:TextBox ID="InvestmentProperty19" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty19">Property Name</label><asp:TextBox ID="InvestmentProperty19" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(19)" type="button" class="btn btn-sm p-1" id="btnAddIP19" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1788,7 +2617,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt19" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate19" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate19" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments19" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments19" class="text-right"></asp:Label></td>
                                                             </tr>
@@ -1815,7 +2659,7 @@
                                                 <div id="divNewIP20" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty20">Property Name</label><asp:TextBox ID="InvestmentProperty20" runat="server" class="form-control form-control-sm" Style="width :240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty20">Property Name</label><asp:TextBox ID="InvestmentProperty20" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(20)" type="button" class="btn btn-sm p-1" id="btnAddIP20" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1864,7 +2708,22 @@
                                                                     <asp:TextBox ID="InvestmentPropertyYearsToRepayDebt20" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span>Monthly Repayments</span></td>
+                                                                <td><span>Annual Appreciation Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyAnnualAppreciationRate20" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Mortgage Rate</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:TextBox runat="server" ID="InvestmentPropertyMortgageRate20" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly Interest Payments</span></td>
+                                                                <td class="text-right">
+                                                                    <asp:Label runat="server" ID="InvestmentPropertyMonthlyInterestRepayments20" class="text-right"></asp:Label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span>Monthly P&I Payments</span></td>
                                                                 <td class="text-right">
                                                                     <asp:Label runat="server" ID="InvestmentPropertyMonthlyRepayments20" class="text-right"></asp:Label></td>
                                                             </tr>
