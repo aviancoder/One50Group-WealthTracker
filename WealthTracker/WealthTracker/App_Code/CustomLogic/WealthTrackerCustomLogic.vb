@@ -191,7 +191,7 @@ Namespace WealthTracker.CustomLogic
                 Dim mdata As InvestmentPropertyData = _output.CurrentInvestmentPropertyList.Item(i)
 
                 ' get monthly interest repayments
-                Dim monthlyInterestRepayments As Double = (mdata.InvestmentPropertyValue * mdata.InvestmentPropertyMortgageRate) / 12
+                Dim monthlyInterestRepayments As Double = (mdata.InvestmentPropertyDebt * mdata.InvestmentPropertyMortgageRate) / 12
                 mdata.InvestmentPropertyMonthlyInterestRepayments = monthlyInterestRepayments
 
                 FillInvestmentPropertyData(_output, mdata)
@@ -206,7 +206,7 @@ Namespace WealthTracker.CustomLogic
                 Dim mdata As InvestmentPropertyData = _output.InvestmentPropertyList.Item(i)
 
                 ' get monthly interest repayments
-                Dim monthlyInterestRepayments As Double = (mdata.InvestmentPropertyValue * mdata.InvestmentPropertyMortgageRate) / 12
+                Dim monthlyInterestRepayments As Double = (mdata.InvestmentPropertyDebt * mdata.InvestmentPropertyMortgageRate) / 12
                 mdata.InvestmentPropertyMonthlyInterestRepayments = monthlyInterestRepayments
 
                 FillInvestmentPropertyData(_output, mdata)
