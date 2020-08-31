@@ -71,7 +71,8 @@
                     <div class="col-md-6 mb-4 pr-md-1">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title text-info">Income</h4>
+                                <h4 class="card-title text-info">Target Income</h4>
+                                <h6 class="card-subtitle mb-4 text-muted text-justify">The below figures take your existing income and inflation adjusts it to your default retirement date based on the youngest applicant turning 65 and then offsetting the pension. You can adjust each of the metrics to form your Target Total income which will then adjust the asset base required to deliver the target income. You will need to remove the pension income if you you intend not to rely on it.</h6>
                                 <table class="table table-borderless">
                                     <tr>
                                         <td><span>Annual income required to retire now ($)</span></td>
@@ -99,7 +100,7 @@
                                             <asp:TextBox runat="server" ID="LessPension" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
                                     </tr>
                                     <tr>
-                                        <td><span class="text-success">Total Annual Income for Retirement ($)</span></td>
+                                        <td><span class="text-success">Target Annual Income for Retirement ($)</span></td>
                                         <td class="text-right">
                                             <asp:Label runat="server" ID="TotalAnnualIncomeForRetirement" class="text-right h4"></asp:Label></td>
                                     </tr>
@@ -107,6 +108,34 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 mb-4 pr-md-1">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title text-info">Target Assets Base</h4>
+                                <h6 class="card-subtitle mb-4 text-muted text-justify">The below shows the sum of assets required outside of your home in order to generate your target income. This is calculated based on the Return on Investment (ROI) noted. Please choose the ROI you believe your assets can return you and this will adjust the required Asset Base Target.</h6>
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td><span>Net Assets Excluding Home</span></td>
+                                        <td class="text-right">
+                                            <asp:Label runat="server" ID="NetAssetsRequired" class="text-right"></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Return on Investment (%)</span></td>
+                                        <td class="text-right">
+                                            <asp:TextBox ID="NetAssetsReturnOnInvestment" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="text-success">Total Net Assets Required (Including Home) ($)</span></td>
+                                        <td class="text-right">
+                                            <asp:Label runat="server" ID="TotalNetAssetsRequired" class="text-right h4"></asp:Label></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6 mb-4 pr-md-1">
                         <div class="card">
                             <div class="card-body">
@@ -135,9 +164,8 @@
                                 </table>
                             </div>
                         </div>
+                        
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6 mb-4 pr-md-1">
                         <div class="card">
                             <div class="card-body">
@@ -183,38 +211,15 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-4 pr-md-1">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title text-info">Share / Business</h4>
-                                <table class="table table-borderless">
-                                    <tr>
-                                        <td><span>Current Share / Business ($)</span></td>
-                                        <td class="text-right">
-                                            <asp:Label runat="server" ID="CurrentShareBusiness" class="text-right"></asp:Label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span>Share / Business Growth Rate (%)</span></td>
-                                        <td class="text-right">
-                                            <asp:TextBox ID="ShareBusinessGrowthRate" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="text-success">Shares/Business Total at Retirement ($)</span></td>
-                                        <td class="text-right">
-                                            <asp:Label runat="server" ID="TotalShareBusinessAtRetirement" class="text-right h4"></asp:Label></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <!-- Start CurrentInvestmentProperty -->
-                <div class="row">
+                <div class="row">   
                     <div class="col-md-12 mb-4 pr-md-1">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title text-info">Current Investment Properties</h4>
+                                <h4 class="card-title text-info">Home</h4>
                                 <div class="row" id="divCurrentInvestmentProperty">
                                     <div class="col-md-6 mb-4" id="divCardCurrentIP1" style="display: none;">
                                         <div class="card">
@@ -222,7 +227,7 @@
                                                 <div id="divNewCurrentIP1" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="CurrentInvestmentProperty1">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty1" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="CurrentInvestmentProperty1">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty1" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveCurrentProperty(1)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP1" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -313,7 +318,7 @@
                                                 <div id="divNewCurrentIP2" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="CurrentInvestmentProperty2">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty2" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="CurrentInvestmentProperty2">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty2" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveCurrentProperty(2)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP2" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -404,7 +409,7 @@
                                                 <div id="divNewCurrentIP3" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="CurrentInvestmentProperty3">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty3" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="CurrentInvestmentProperty3">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty3" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveCurrentProperty(3)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP3" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -495,7 +500,7 @@
                                                 <div id="divNewCurrentIP4" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="CurrentInvestmentProperty4">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty4" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="CurrentInvestmentProperty4">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty4" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveCurrentProperty(4)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP4" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -586,7 +591,7 @@
                                                 <div id="divNewCurrentIP5" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="CurrentInvestmentProperty5">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty5" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="CurrentInvestmentProperty5">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty5" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveCurrentProperty(5)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP5" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -677,7 +682,7 @@
                                                 <div id="divNewCurrentIP6" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="CurrentInvestmentProperty6">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty6" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="CurrentInvestmentProperty6">Property Name</label><asp:TextBox ID="CurrentInvestmentProperty6" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveCurrentProperty(6)" type="button" class="btn btn-sm p-1" id="btnAddCurrentIP6" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -772,6 +777,31 @@
                     <div class="col-md-6 mb-4 pr-md-1">
                         <div class="card">
                             <div class="card-body">
+                                <h4 class="card-title text-info">Share / Business</h4>
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td><span>Current Share / Business ($)</span></td>
+                                        <td class="text-right">
+                                            <asp:Label runat="server" ID="CurrentShareBusiness" class="text-right"></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Share / Business Growth Rate (%)</span></td>
+                                        <td class="text-right">
+                                            <asp:TextBox ID="ShareBusinessGrowthRate" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="text-success">Shares/Business Total at Retirement ($)</span></td>
+                                        <td class="text-right">
+                                            <asp:Label runat="server" ID="TotalShareBusinessAtRetirement" class="text-right h4"></asp:Label></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-6 mb-4 pr-md-1">
+                        <%--<div class="card">
+                            <div class="card-body">
                                 <h4 class="card-title text-info">Property</h4>
                                 <table class="table table-borderless">
                                     <tr>
@@ -806,31 +836,7 @@
                                     </tr>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-4 pr-md-1">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title text-info">Assets</h4>
-                                <table class="table table-borderless">
-                                    <tr>
-                                        <td><span>Net Assets Excluding Home</span></td>
-                                        <td class="text-right">
-                                            <asp:Label runat="server" ID="NetAssetsRequired" class="text-right"></asp:Label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span>Return on Investment (%)</span></td>
-                                        <td class="text-right">
-                                            <asp:TextBox ID="NetAssetsReturnOnInvestment" runat="server" class="form-control form-control-sm text-right one50group-formattednumber"></asp:TextBox></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="text-success">Total Net Assets Required (Including Home) ($)</span></td>
-                                        <td class="text-right">
-                                            <asp:Label runat="server" ID="TotalNetAssetsRequired" class="text-right h4"></asp:Label></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
                 <div class="row">
@@ -930,7 +936,7 @@
                                                 <div id="divNewIP1" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty1">Property Name</label><asp:TextBox ID="InvestmentProperty1" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty1">Property Name</label><asp:TextBox ID="InvestmentProperty1" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(1)" type="button" class="btn btn-sm p-1" id="btnAddIP1" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1021,7 +1027,7 @@
                                                 <div id="divNewIP2" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty2">Property Name</label><asp:TextBox ID="InvestmentProperty2" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty2">Property Name</label><asp:TextBox ID="InvestmentProperty2" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(2)" type="button" class="btn btn-sm p-1" id="btnAddIP2" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1112,7 +1118,7 @@
                                                 <div id="divNewIP3" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty3">Property Name</label><asp:TextBox ID="InvestmentProperty3" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty3">Property Name</label><asp:TextBox ID="InvestmentProperty3" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(3)" type="button" class="btn btn-sm p-1" id="btnAddIP3" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1203,7 +1209,7 @@
                                                 <div id="divNewIP4" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty4">Property Name</label><asp:TextBox ID="InvestmentProperty4" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty4">Property Name</label><asp:TextBox ID="InvestmentProperty4" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(4)" type="button" class="btn btn-sm p-1" id="btnAddIP4" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1294,7 +1300,7 @@
                                                 <div id="divNewIP5" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty5">Property Name</label><asp:TextBox ID="InvestmentProperty5" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty5">Property Name</label><asp:TextBox ID="InvestmentProperty5" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(5)" type="button" class="btn btn-sm p-1" id="btnAddIP5" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1385,7 +1391,7 @@
                                                 <div id="divNewIP6" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty6">Property Name</label><asp:TextBox ID="InvestmentProperty6" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty6">Property Name</label><asp:TextBox ID="InvestmentProperty6" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(6)" type="button" class="btn btn-sm p-1" id="btnAddIP6" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1476,7 +1482,7 @@
                                                 <div id="divNewIP7" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty7">Property Name</label><asp:TextBox ID="InvestmentProperty7" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty7">Property Name</label><asp:TextBox ID="InvestmentProperty7" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(7)" type="button" class="btn btn-sm p-1" id="btnAddIP7" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1567,7 +1573,7 @@
                                                 <div id="divNewIP8" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty8">Property Name</label><asp:TextBox ID="InvestmentProperty8" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty8">Property Name</label><asp:TextBox ID="InvestmentProperty8" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(8)" type="button" class="btn btn-sm p-1" id="btnAddIP8" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1658,7 +1664,7 @@
                                                 <div id="divNewIP9" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty9">Property Name</label><asp:TextBox ID="InvestmentProperty9" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty9">Property Name</label><asp:TextBox ID="InvestmentProperty9" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(9)" type="button" class="btn btn-sm p-1" id="btnAddIP9" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1749,7 +1755,7 @@
                                                 <div id="divNewIP10" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty10">Property Name</label><asp:TextBox ID="InvestmentProperty10" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty10">Property Name</label><asp:TextBox ID="InvestmentProperty10" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(10)" type="button" class="btn btn-sm p-1" id="btnAddIP10" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1840,7 +1846,7 @@
                                                 <div id="divNewIP11" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty11">Property Name</label><asp:TextBox ID="InvestmentProperty11" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty11">Property Name</label><asp:TextBox ID="InvestmentProperty11" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(11)" type="button" class="btn btn-sm p-1" id="btnAddIP11" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -1931,7 +1937,7 @@
                                                 <div id="divNewIP12" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty12">Property Name</label><asp:TextBox ID="InvestmentProperty12" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty12">Property Name</label><asp:TextBox ID="InvestmentProperty12" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(12)" type="button" class="btn btn-sm p-1" id="btnAddIP12" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -2022,7 +2028,7 @@
                                                 <div id="divNewIP13" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty13">Property Name</label><asp:TextBox ID="InvestmentProperty13" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty13">Property Name</label><asp:TextBox ID="InvestmentProperty13" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(13)" type="button" class="btn btn-sm p-1" id="btnAddIP13" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -2113,7 +2119,7 @@
                                                 <div id="divNewIP14" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty14">Property Name</label><asp:TextBox ID="InvestmentProperty14" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty14">Property Name</label><asp:TextBox ID="InvestmentProperty14" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(14)" type="button" class="btn btn-sm p-1" id="btnAddIP14" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -2204,7 +2210,7 @@
                                                 <div id="divNewIP15" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty15">Property Name</label><asp:TextBox ID="InvestmentProperty15" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty15">Property Name</label><asp:TextBox ID="InvestmentProperty15" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(15)" type="button" class="btn btn-sm p-1" id="btnAddIP15" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -2295,7 +2301,7 @@
                                                 <div id="divNewIP16" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty16">Property Name</label><asp:TextBox ID="InvestmentProperty16" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty16">Property Name</label><asp:TextBox ID="InvestmentProperty16" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(16)" type="button" class="btn btn-sm p-1" id="btnAddIP16" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -2386,7 +2392,7 @@
                                                 <div id="divNewIP17" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty17">Property Name</label><asp:TextBox ID="InvestmentProperty17" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty17">Property Name</label><asp:TextBox ID="InvestmentProperty17" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(17)" type="button" class="btn btn-sm p-1" id="btnAddIP17" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -2477,7 +2483,7 @@
                                                 <div id="divNewIP18" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty18">Property Name</label><asp:TextBox ID="InvestmentProperty18" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty18">Property Name</label><asp:TextBox ID="InvestmentProperty18" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(18)" type="button" class="btn btn-sm p-1" id="btnAddIP18" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -2568,7 +2574,7 @@
                                                 <div id="divNewIP19" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty19">Property Name</label><asp:TextBox ID="InvestmentProperty19" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty19">Property Name</label><asp:TextBox ID="InvestmentProperty19" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(19)" type="button" class="btn btn-sm p-1" id="btnAddIP19" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>
@@ -2659,7 +2665,7 @@
                                                 <div id="divNewIP20" style="display: none;">
                                                     <div class="d-flex">
                                                         <div class="mr-auto p-2">
-                                                            <label for="InvestmentProperty20">Property Name</label><asp:TextBox ID="InvestmentProperty20" runat="server" class="form-control form-control-sm" Style="width 240px !important;"></asp:TextBox>
+                                                            <label for="InvestmentProperty20">Property Name</label><asp:TextBox ID="InvestmentProperty20" runat="server" class="form-control form-control-sm" Style="width: 240px !important;"></asp:TextBox>
                                                         </div>
                                                         <div class="p-2">
                                                             <button onclick="addsaveProperty(20)" type="button" class="btn btn-sm p-1" id="btnAddIP20" style="display: none;"><span class="fa fa-plus-circle" style="color: #28a745; font-size: 2rem;" title="add property"></span></button>

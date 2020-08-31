@@ -74,17 +74,8 @@ $(document).ready(function () {
 // Data
 
 function requestData() {
-    //Test();
-    getCash();
-    //getShareBusiness();
-    //getKiwiSaverClient();
-    //getKiwiSaverSpouse();
-    //getHome();
-    //getInvestmentInheritance();
-    //getCurrentAssets();
-    //getInvestmentProperties();
-    //getDebt();
-    //getFinancialGoal();
+
+    getCurrentAssets();
 }
 
 function Test() {
@@ -115,18 +106,22 @@ function getCash() {
 
             data = data["d"];
             var dataItems = new Array();
+            var sumValues = 0;
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeCashSavings);
+                sumValues = sumValues + arrayItem.CumulativeCashSavings;
             });
-            chart.addSeries({
-                name: "Cash",
-                data: dataItems,
-                dataLabels: { enabled: false },
-                type: 'area',
-                stack: 1,
-                lineWidth: 0
-            });
-            chart.redraw();
+            if (sumValues !== 0) {
+                chart.addSeries({
+                    name: "Cash",
+                    data: dataItems,
+                    dataLabels: { enabled: false },
+                    type: 'area',
+                    stack: 1,
+                    lineWidth: 0
+                });
+                chart.redraw();
+            }
         },
         complete: function (data, status) {
             getShareBusiness();
@@ -145,18 +140,22 @@ function getShareBusiness() {
         success: function (data) {
             data = data["d"];
             var dataItems = new Array();
+            var sumValues = 0;
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeShareBusiness);
+                sumValues = sumValues + arrayItem.CumulativeShareBusiness;
             });
-            chart.addSeries({
-                name: "Share/Business",
-                data: dataItems,
-                dataLabels: { enabled: false },
-                type: 'area',
-                stack: 1,
-                lineWidth: 0
-            });
-            chart.redraw();
+            if (sumValues !== 0) {
+                chart.addSeries({
+                    name: "Share/Business",
+                    data: dataItems,
+                    dataLabels: { enabled: false },
+                    type: 'area',
+                    stack: 1,
+                    lineWidth: 0
+                });
+                chart.redraw();
+            }
         },
         complete: function (data, status) {
             getKiwiSaverClient();
@@ -176,19 +175,23 @@ function getKiwiSaverClient() {
             data = data["d"];
             var dataItems = new Array();
             var kiwiSaverName = "KiwiSaver"
+            var sumValues = 0;
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeKiwiSaver);
                 kiwiSaverName = arrayItem.KiwiSaverName + " KiwiSaver";
+                sumValues = sumValues + arrayItem.CumulativeKiwiSaver;
             });
-            chart.addSeries({
-                name: kiwiSaverName,
-                data: dataItems,
-                dataLabels: { enabled: false },
-                type: 'area',
-                stack: 1,
-                lineWidth: 0
-            });
-            chart.redraw();
+            if (sumValues !== 0) {
+                chart.addSeries({
+                    name: kiwiSaverName,
+                    data: dataItems,
+                    dataLabels: { enabled: false },
+                    type: 'area',
+                    stack: 1,
+                    lineWidth: 0
+                });
+                chart.redraw();
+            }
         },
         complete: function (data, status) {
             getKiwiSaverSpouse();
@@ -208,20 +211,23 @@ function getKiwiSaverSpouse() {
             data = data["d"];
             var dataItems = new Array();
             var kiwiSaverName = "KiwiSaver"
+            var sumValues = 0;
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeKiwiSaver);
                 kiwiSaverName = arrayItem.KiwiSaverName + " KiwiSaver";
+                sumValues = sumValues + arrayItem.CumulativeKiwiSaver;
             });
-            chart.addSeries({
-                name: kiwiSaverName,
-                data: dataItems,
-                dataLabels: { enabled: false },
-                type: 'area',
-                stack: 1,
-                lineWidth: 0
-            });
-            chart.redraw();
-
+            if (sumValues !== 0) {
+                chart.addSeries({
+                    name: kiwiSaverName,
+                    data: dataItems,
+                    dataLabels: { enabled: false },
+                    type: 'area',
+                    stack: 1,
+                    lineWidth: 0
+                });
+                chart.redraw();
+            }
         },
         complete: function (data, status) {
             getCurrentInvestmentProperties();
@@ -262,26 +268,6 @@ function getCurrentInvestmentProperties() {
     });
 }
 
-function getHome() {
-    $.ajax({
-        url: '/dataservice.asmx/GetHome',
-        type: "POST",
-        dataType: "json",
-        contentType: 'application/json',
-        data: {},
-        success: function (data) {
-            data = data["d"];
-            var dataItems = new Array();
-            data.forEach(function (arrayItem) {
-                dataItems.push(arrayItem.NetPropertyWealth);
-            });
-            chart.series[4].setData(dataItems, false);
-            chart.redraw();
-        },
-        cache: false
-    });
-}
-
 function getInvestmentInheritance() {
     $.ajax({
         url: '/dataservice.asmx/GetInvestmentInheritance',
@@ -292,18 +278,22 @@ function getInvestmentInheritance() {
         success: function (data) {
             data = data["d"];
             var dataItems = new Array();
+            var sumValues = false;
             data.forEach(function (arrayItem) {
                 dataItems.push(arrayItem.CumulativeInheritanceInvestment);
+                sumValues = sumValues + arrayItem.CumulativeInheritanceInvestment;
             });
-            chart.addSeries({
-                name: "Investment / Inheritance",
-                data: dataItems,
-                dataLabels: { enabled: false },
-                type: "area",
-                stack: 1,
-                lineWidth: 0
-            });
-            chart.redraw();
+            if (sumValues !== 0) {
+                chart.addSeries({
+                    name: "Investment / Inheritance",
+                    data: dataItems,
+                    dataLabels: { enabled: false },
+                    type: "area",
+                    stack: 1,
+                    lineWidth: 0
+                });
+                chart.redraw();
+            }
         },
         complete: function (data, status) {
             getDebt();
@@ -323,21 +313,25 @@ function getDebt() {
         success: function (data) {
             data = data["d"];
             var dataItems = new Array();
+            var sumValues = 0;
             data.forEach(function (arrayItem) {
                 dataItems.push(-arrayItem.CumulativeCurrentDebt);
+                sumValues = sumValues + arrayItem.CumulativeCurrentDebt;
             });
-            chart.addSeries({
-                name: "Debt",
-                data: dataItems,
-                dataLabels: { enabled: false },
-                type: "spline",
-                stack: 2,
-                lineWidth: 4,
-            });
-            chart.redraw();
+            if (sumValues !== 0) {
+                chart.addSeries({
+                    name: "Debt",
+                    data: dataItems,
+                    dataLabels: { enabled: false },
+                    type: "spline",
+                    stack: 2,
+                    lineWidth: 4,
+                });
+                chart.redraw();
+            }
         },
         complete: function (data, status) {
-            getCurrentAssets();
+            getFinancialGoal();
         },
         cache: false
     });
@@ -370,7 +364,7 @@ function getCurrentAssets() {
             });
         },
         complete: function (data, status) {
-            getFinancialGoal();
+            getCash();
         },
         cache: false
     });

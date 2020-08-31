@@ -588,6 +588,18 @@ Namespace WealthTracker.CustomLogic
         Public Function GetYearlyPayment(ByVal _presentValue As Double, ByVal _interestRate As Double, ByVal _numberOfYears As Integer) As Double
             Dim retval As Double = _presentValue
 
+            Dim monthlyPayments = GetmonthlyPayment(_presentValue, _interestRate, _numberOfYears)
+            retval = monthlyPayments * 12
+            'retval = _presentValue / (((Math.Pow((1 + _interestRate), _numberOfYears)) - 1) / (_interestRate * (Math.Pow((1 + _interestRate), _numberOfYears))))
+
+            Return retval
+        End Function
+
+        Public Function GetmonthlyPayment(ByVal _presentValue As Double, ByVal _interestRate As Double, ByVal _numberOfYears As Integer) As Double
+            Dim retval As Double = _presentValue
+
+            _interestRate = _interestRate / 12
+            _numberOfYears = _numberOfYears * 12
             retval = _presentValue / (((Math.Pow((1 + _interestRate), _numberOfYears)) - 1) / (_interestRate * (Math.Pow((1 + _interestRate), _numberOfYears))))
 
             Return retval

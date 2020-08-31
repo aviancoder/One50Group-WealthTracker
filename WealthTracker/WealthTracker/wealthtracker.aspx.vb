@@ -120,12 +120,12 @@ Partial Class _wealthtracker
         Me.ShareBusinessGrowthRate.Text = (output.ShareBusinessGrowthRate * 100).ToString("#,##0")
         Me.TotalShareBusinessAtRetirement.Text = output.TotalShareBusinessAtRetirement.ToString("#,##0")
 
-        Me.HomeProperty.Text = output.HomeProperty.ToString("#,##0")
-        Me.HomeMortgage.Text = output.HomeMortgage.ToString("#,##0")
-        Me.HomeInterestRate.Text = (output.HomeInterestRate * 100).ToString("#,##0")
-        Me.HomeAnnualAppreciationRate.Text = (output.HomeAnnualAppreciationRate * 100).ToString("#,##0")
-        Me.HomeYearsToRepayMortgage.Text = output.HomeYearsToRepayMortgage.ToString("#,##0")
-        Me.NetHomeValueAtRetirement.Text = output.NetHomeValueAtRetirement.ToString("#,##0")
+        'Me.HomeProperty.Text = output.HomeProperty.ToString("#,##0")
+        'Me.HomeMortgage.Text = output.HomeMortgage.ToString("#,##0")
+        'Me.HomeInterestRate.Text = (output.HomeInterestRate * 100).ToString("#,##0")
+        'Me.HomeAnnualAppreciationRate.Text = (output.HomeAnnualAppreciationRate * 100).ToString("#,##0")
+        'Me.HomeYearsToRepayMortgage.Text = output.HomeYearsToRepayMortgage.ToString("#,##0")
+        'Me.NetHomeValueAtRetirement.Text = output.NetHomeValueAtRetirement.ToString("#,##0")
 
         Me.NetAssetsRequired.Text = output.NetAssetsRequired.ToString("#,##0")
         Me.NetAssetsReturnOnInvestment.Text = (output.NetAssetsReturnOnInvestment * 100).ToString("#,##0")
@@ -199,11 +199,11 @@ Partial Class _wealthtracker
         _output.KiwiSaverAverageInvestmentRateSpouse = _output.KiwiSaverAverageInvestmentRateSpouse / 100
         _output.ShareBusinessGrowthRate = ExtractNumericValueFromTextBox(Me.ShareBusinessGrowthRate)
         _output.ShareBusinessGrowthRate = _output.ShareBusinessGrowthRate / 100
-        _output.HomeInterestRate = ExtractNumericValueFromTextBox(Me.HomeInterestRate)
-        _output.HomeInterestRate = _output.HomeInterestRate / 100
-        _output.HomeAnnualAppreciationRate = ExtractNumericValueFromTextBox(Me.HomeAnnualAppreciationRate)
-        _output.HomeAnnualAppreciationRate = _output.HomeAnnualAppreciationRate / 100
-        _output.HomeYearsToRepayMortgage = ExtractNumericValueFromTextBox(Me.HomeYearsToRepayMortgage)
+        '_output.HomeInterestRate = ExtractNumericValueFromTextBox(Me.HomeInterestRate)
+        '_output.HomeInterestRate = _output.HomeInterestRate / 100
+        '_output.HomeAnnualAppreciationRate = ExtractNumericValueFromTextBox(Me.HomeAnnualAppreciationRate)
+        '_output.HomeAnnualAppreciationRate = _output.HomeAnnualAppreciationRate / 100
+        '_output.HomeYearsToRepayMortgage = ExtractNumericValueFromTextBox(Me.HomeYearsToRepayMortgage)
         _output.NetAssetsReturnOnInvestment = ExtractNumericValueFromTextBox(Me.NetAssetsReturnOnInvestment)
         _output.NetAssetsReturnOnInvestment = _output.NetAssetsReturnOnInvestment / 100
 
